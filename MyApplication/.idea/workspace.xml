@@ -9,11 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9baba486-f430-4765-978b-bb8d92a2b6d8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/app/.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="9baba486-f430-4765-978b-bb8d92a2b6d8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,16 +51,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/symon/3D Objects/SL3_Project/MyApplication/app/adapters"
+    "last_opened_file_path": "C:/Users/symon/3D Objects/SL3_Project/MyApplication/app/ui"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\symon\3D Objects\SL3_Project\MyApplication\app\adapters" />
-      <recent name="C:\Users\symon\3D Objects\SL3_Project\MyApplication\app\viewmodels" />
-      <recent name="C:\Users\symon\3D Objects\SL3_Project\MyApplication\app\repository" />
-      <recent name="C:\Users\symon\3D Objects\SL3_Project\MyApplication\app\data" />
       <recent name="C:\Users\symon\3D Objects\SL3_Project\MyApplication\app\ui" />
+      <recent name="C:\Users\symon\3D Objects\SL3_Project\MyApplication\app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\symon\3D Objects\SL3_Project\MyApplication\app" />

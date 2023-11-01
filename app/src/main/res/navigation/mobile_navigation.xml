@@ -22,4 +22,10 @@
         android:name="com.example.sl3verbeterd.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_accounts"
+        android:name="com.example.sl3verbeterd.ui.accounts.AccountsFragment"
+        android:label="accounts"
+        tools:layout="@layout/fragment_accounts" />
 </navigation>

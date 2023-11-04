@@ -1,22 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/text_notifications"
+        android:id="@+id/searchText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="HireHub CRUD Profile Wijzigen"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/editFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Voornaam" />
+
+    <EditText
+        android:id="@+id/editLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Achternaam" />
+
+    <EditText
+        android:id="@+id/editRegion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Regio" />
+
+    <EditText
+        android:id="@+id/editEducationLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Opleidingsniveau" />
+
+    <EditText
+        android:id="@+id/editLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Locatie" />
+
+    <!-- Buttons wrapped in a horizontal LinearLayout -->
+    <!-- Buttons wrapped in a horizontal LinearLayout with gravity set to center -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wijzigen"
+            android:layout_marginEnd="16dp" /> <!-- Add marginEnd for space -->
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terug"
+            android:layout_marginStart="16dp" /> <!-- Add marginStart for space -->
+    </LinearLayout>
+
+
+    <!-- Bottom Navigation View -->
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verwijder Profiel"
+        android:layout_marginStart="100dp" /> <!-- Add marginStart for space -->
+    />
+
+
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.sl3verbeterd.ui.notifications
+package com.example.sl3verbeterd.ui.applicant
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.sl3verbeterd.databinding.FragmentNotificationsBinding
+import com.example.sl3verbeterd.databinding.FragmentApplicantBinding
 
-class NotificationsFragment : Fragment() {
+class ApplicantsFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentApplicantBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,15 +22,20 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val applicantsViewModel =
+            ViewModelProvider(this).get(ApplicantsViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentApplicantBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        // Testing Area
+        val testUserId = 1;
+        if (testUserId == 2){
+
+        val textView: TextView = binding.searchText
+        applicantsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
+        }
         }
         return root
     }

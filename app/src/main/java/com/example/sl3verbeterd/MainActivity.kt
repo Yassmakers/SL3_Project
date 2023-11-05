@@ -14,6 +14,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.sl3verbeterd.ui.theme.ApplicantAndroidTheme
 
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 //    )
 
 
-//    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +53,11 @@ class MainActivity : AppCompatActivity() {
 
         val dao:HireHubDao = HireHubDatabase.getInstance(this).hireHubDao
 
+
+//        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+//        val adapter = ProfileListAdapter()
+//        recyclerView.adapter = adapter
+//        recyclerView.layoutManager = LinearLayoutManager(this)
 
         val viewModelPro by viewModels<ProfileViewModel>(
             factoryProducer = {

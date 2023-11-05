@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class AccountViewModel(
-    private val daoAcc: AccountDao
+    private val daoAcc: HireHubDao
 ): ViewModel() {
 
     private val _sortType = MutableStateFlow(SortType.FIRST_NAME)

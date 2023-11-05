@@ -10,6 +10,9 @@ interface HireHubDao {
     @Upsert
     suspend fun upsertProfile(profile: Profile)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertProfile(profile: Profile)
+
     @Delete
     suspend fun deleteProfile(profile: Profile)
 

@@ -1,23 +1,34 @@
 package com.example.sl3verbeterd
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import androidx.lifecycle.asLiveData
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ProfileViewModel(
-    private val daoPro: HireHubDao
+    private val hireHubDao: HireHubDao
 ): ViewModel() {
+
+
+
+//    val allProfiles: LiveData<List<Profile>> = repository.allProfiles.asLiveData()
+//
+//    fun insertProfile(profile: Profile) = viewModelScope.launch {
+//        repository.insertProfile(profile)
+//    }
 
     private val _sortType = MutableStateFlow(SortType.FIRST_NAME)
     private val _profiles = _sortType
         .flatMapLatest { sortType ->
             when(sortType) {
-                SortType.FIRST_NAME -> daoPro.getProfilesOrderedByFirstName()
-                SortType.LAST_NAME -> daoPro.getProfilesOrderedByLastName()
-                SortType.PHONE_NUMBER -> daoPro.getProfilesOrderedByPhoneNumber()
+                SortType.FIRST_NAME -> hireHubDao.getProfilesOrderedByFirstName()
+                SortType.LAST_NAME -> hireHubDao.getProfilesOrderedByLastName()
+                SortType.PHONE_NUMBER -> hireHubDao.getProfilesOrderedByPhoneNumber()
             }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
@@ -34,7 +45,7 @@ class ProfileViewModel(
         when(event) {
             is ProfileEvent.DeleteProfile -> {
                 viewModelScope.launch {
-                    daoPro.deleteProfile(event.profile)
+                    hireHubDao.deleteProfile(event.profile)
                 }
             }
 
@@ -84,7 +95,7 @@ class ProfileViewModel(
                     phoneNumber = phoneNumber
                 )
                 viewModelScope.launch {
-                    daoPro.upsertProfile(profile)
+                    hireHubDao.upsertProfile(profile)
                 }
                 _state.update { it.copy(
                     isAddingProfile = false,
@@ -116,7 +127,7 @@ class ProfileViewModel(
 //                )
 
                     viewModelScope.launch {
-                        daoPro.updateProfile(firstName, id)
+                        hireHubDao.updateProfile(firstName, id)
                     }
 
                 _state.update { it.copy(
@@ -158,3 +169,13 @@ class ProfileViewModel(
         }
     }
 }
+
+//class ProfileViewModelFactory(private val repository: HireHubRepository) : ViewModelProvider.Factory {
+//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//        if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
+//            @Suppress("UNCHECKED_CAST")
+//            return ProfileViewModel(repository) as T
+//        }
+//        throw IllegalArgumentException("Unknown ViewModel class")
+//    }
+//}

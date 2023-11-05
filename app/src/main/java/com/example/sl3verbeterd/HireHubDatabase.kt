@@ -28,7 +28,7 @@ abstract class HireHubDatabase: RoomDatabase() {
                 return INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     HireHubDatabase::class.java,
-                    "TheDB"
+                    "HireHubDatabase"
                 ).build().also {
                     INSTANCE = it
                 }

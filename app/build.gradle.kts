@@ -1,7 +1,7 @@
 plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
-    id ("kotlin-kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -39,7 +39,7 @@ android {
         viewBinding = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0"
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
 
 }
@@ -71,5 +71,5 @@ dependencies {
 
     // Room
     implementation ("androidx.room:room-ktx:2.6.0")
-    kapt ("androidx.room:room-compiler:2.6.0")
+    ksp("androidx.room:room-compiler:2.6.0")
 }

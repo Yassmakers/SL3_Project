@@ -8,16 +8,16 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class AccountViewModel(
-    private val dao: AccountDao
+    private val daoAcc: AccountDao
 ): ViewModel() {
 
     private val _sortType = MutableStateFlow(SortType.FIRST_NAME)
     private val _accounts = _sortType
         .flatMapLatest { sortType ->
             when(sortType) {
-                SortType.FIRST_NAME -> dao.getAccountsOrderedByFirstName()
-                SortType.LAST_NAME -> dao.getAccountsOrderedByLastName()
-                SortType.PHONE_NUMBER -> dao.getAccountsOrderedByPhoneNumber()
+                SortType.FIRST_NAME -> daoAcc.getAccountsOrderedByFirstName()
+                SortType.LAST_NAME -> daoAcc.getAccountsOrderedByLastName()
+                SortType.PHONE_NUMBER -> daoAcc.getAccountsOrderedByPhoneNumber()
             }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
@@ -34,7 +34,7 @@ class AccountViewModel(
         when(event) {
             is AccountEvent.DeleteAccount -> {
                 viewModelScope.launch {
-                    dao.deleteAccount(event.account)
+                    daoAcc.deleteAccount(event.account)
                 }
             }
 
@@ -84,7 +84,7 @@ class AccountViewModel(
                     phoneNumber = phoneNumber
                 )
                 viewModelScope.launch {
-                    dao.upsertAccount(account)
+                    daoAcc.upsertAccount(account)
                 }
                 _state.update { it.copy(
                     isAddingAccount = false,
@@ -116,7 +116,7 @@ class AccountViewModel(
 //                )
 
                     viewModelScope.launch {
-                        dao.updateAccount(firstName, id)
+                        daoAcc.updateAccount(firstName, id)
                     }
 
                 _state.update { it.copy(

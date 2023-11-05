@@ -20,22 +20,27 @@ import com.example.sl3verbeterd.ui.theme.ApplicantAndroidTheme
 
 class MainActivity : AppCompatActivity() {
 
-    private val db by lazy {
-        Room.databaseBuilder(
-            applicationContext,
-            ProfileDatabase::class.java,
-            "profiles.db"
-        ).build()
-    }
-    private val viewModel by viewModels<ProfileViewModel>(
-        factoryProducer = {
-            object : ViewModelProvider.Factory {
-                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return ProfileViewModel(db.dao) as T
-                }
-            }
-        }
-    )
+//    private val db by lazy {
+//        Room.databaseBuilder(
+//            applicationContext,
+//            HireHubDatabase::class.java,
+//            "HireHub.db"
+//        ).build()
+//    }
+
+
+
+
+
+//    private val viewModelAcc by viewModels<AccountViewModel>(
+//        factoryProducer = {
+//            object : ViewModelProvider.Factory {
+//                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//                    return AccountViewModel(db.daoAcc) as T
+//                }
+//            }
+//        }
+//    )
 
 
 //    private lateinit var binding: ActivityMainBinding
@@ -43,10 +48,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+        val dao:HireHubDao = HireHubDatabase.getInstance(this).hireHubDao
+
+
+        val viewModelPro by viewModels<ProfileViewModel>(
+            factoryProducer = {
+                object : ViewModelProvider.Factory {
+                    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                        return ProfileViewModel(dao) as T
+                    }
+                }
+            }
+        )
         setContent {
             ApplicantAndroidTheme {
-                val state by viewModel.state.collectAsState()
-                ProfileScreen(state = state, onEvent = viewModel::onEvent)
+                val state by viewModelPro.state.collectAsState()
+                ProfileScreen(state = state, onEvent = viewModelPro::onEvent)
             }
         }
 //        binding = ActivityMainBinding.inflate(layoutInflater)

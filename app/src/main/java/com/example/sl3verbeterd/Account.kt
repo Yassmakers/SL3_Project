@@ -3,7 +3,7 @@ package com.example.sl3verbeterd
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "account")
 data class Account(
     val firstName: String,
     val lastName: String,

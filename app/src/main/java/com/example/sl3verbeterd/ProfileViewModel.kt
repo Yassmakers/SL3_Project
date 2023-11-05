@@ -8,16 +8,16 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ProfileViewModel(
-    private val dao: ProfileDao
+    private val daoPro: HireHubDao
 ): ViewModel() {
 
     private val _sortType = MutableStateFlow(SortType.FIRST_NAME)
     private val _profiles = _sortType
         .flatMapLatest { sortType ->
             when(sortType) {
-                SortType.FIRST_NAME -> dao.getProfilesOrderedByFirstName()
-                SortType.LAST_NAME -> dao.getProfilesOrderedByLastName()
-                SortType.PHONE_NUMBER -> dao.getProfilesOrderedByPhoneNumber()
+                SortType.FIRST_NAME -> daoPro.getProfilesOrderedByFirstName()
+                SortType.LAST_NAME -> daoPro.getProfilesOrderedByLastName()
+                SortType.PHONE_NUMBER -> daoPro.getProfilesOrderedByPhoneNumber()
             }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
@@ -34,7 +34,7 @@ class ProfileViewModel(
         when(event) {
             is ProfileEvent.DeleteProfile -> {
                 viewModelScope.launch {
-                    dao.deleteProfile(event.profile)
+                    daoPro.deleteProfile(event.profile)
                 }
             }
 
@@ -84,7 +84,7 @@ class ProfileViewModel(
                     phoneNumber = phoneNumber
                 )
                 viewModelScope.launch {
-                    dao.upsertProfile(profile)
+                    daoPro.upsertProfile(profile)
                 }
                 _state.update { it.copy(
                     isAddingProfile = false,
@@ -116,7 +116,7 @@ class ProfileViewModel(
 //                )
 
                     viewModelScope.launch {
-                        dao.updateProfile(firstName, id)
+                        daoPro.updateProfile(firstName, id)
                     }
 
                 _state.update { it.copy(

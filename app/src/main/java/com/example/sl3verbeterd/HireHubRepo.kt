@@ -34,7 +34,7 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
 return hireHubDao.getProfilesOrderedByFirstName()
     }
 
-    fun getProfilesOrderedByLastName(): Flow<List<Profile>> {
+   fun getProfilesOrderedByLastName(): Flow<List<Profile>> {
  return hireHubDao.getProfilesOrderedByLastName()
     }
 

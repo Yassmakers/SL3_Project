@@ -6,8 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.sl3verbeterd.HireHubDao
+import com.example.sl3verbeterd.HireHubDatabase
 import com.example.sl3verbeterd.databinding.FragmentApplicantBinding
+
 
 class ApplicantsFragment : Fragment() {
 
@@ -28,15 +33,11 @@ class ApplicantsFragment : Fragment() {
         _binding = FragmentApplicantBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Testing Area
-        val testUserId = 1;
-        if (testUserId == 2){
-
         val textView: TextView = binding.searchText
         applicantsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
-        }
+
         return root
     }
 

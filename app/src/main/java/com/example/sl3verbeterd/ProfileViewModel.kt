@@ -9,9 +9,25 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import androidx.lifecycle.asLiveData
 
+
+import androidx.lifecycle.MutableLiveData
+
+import com.example.sl3verbeterd.HireHubDao
+import com.example.sl3verbeterd.Profile
+import com.example.sl3verbeterd.ProfileEvent
+import com.example.sl3verbeterd.ProfileState
+import com.example.sl3verbeterd.SortType
+
+import androidx.lifecycle.viewModelScope
+
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import androidx.lifecycle.asLiveData
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class ProfileViewModel(
     private val hireHubDao: HireHubDao
+//    , private val repository: HireHubRepository
 ): ViewModel() {
 
 
@@ -168,6 +184,8 @@ class ProfileViewModel(
             }
         }
     }
+
+
 }
 
 //class ProfileViewModelFactory(private val repository: HireHubRepository) : ViewModelProvider.Factory {

@@ -1,6 +1,5 @@
 package com.example.sl3verbeterd
 
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sl3verbeterd.ProfileListAdapter.ProfileViewHolder
-class ProfileListAdapter : ListAdapter<Profile, ProfileViewHolder>(PROFILES_COMPARATOR) {
+
+class ProfileListAdapter : ListAdapter<Profile, ProfileListAdapter.ProfileViewHolder>(PROFILES_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         return ProfileViewHolder.create(parent)
@@ -39,7 +38,7 @@ class ProfileListAdapter : ListAdapter<Profile, ProfileViewHolder>(PROFILES_COMP
     companion object {
         private val PROFILES_COMPARATOR = object : DiffUtil.ItemCallback<Profile>() {
             override fun areItemsTheSame(oldItem: Profile, newItem: Profile): Boolean {
-                return oldItem === newItem
+                return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(oldItem: Profile, newItem: Profile): Boolean {

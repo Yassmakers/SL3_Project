@@ -4,22 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.sl3verbeterd.HireHubDao
-import com.example.sl3verbeterd.HireHubDatabase
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.sl3verbeterd.ProfileListAdapter
 import com.example.sl3verbeterd.databinding.FragmentApplicantBinding
-
 
 class ApplicantsFragment : Fragment() {
 
+    private lateinit var applicantsViewModel: ApplicantsViewModel
+    private lateinit var profileAdapter: ProfileListAdapter
     private var _binding: FragmentApplicantBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -27,15 +23,28 @@ class ApplicantsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val applicantsViewModel =
-            ViewModelProvider(this).get(ApplicantsViewModel::class.java)
-
         _binding = FragmentApplicantBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.searchText
-        applicantsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        applicantsViewModel = ViewModelProvider(this).get(ApplicantsViewModel::class.java)
+        profileAdapter = ProfileListAdapter()
+
+        val recyclerView: RecyclerView = binding.import androidx.recyclerview.widget.RecyclerViewrecyclerview
+        recyclerView.adapter = profileAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // Observe LiveData from the ViewModel
+        applicantsViewModel.profiles.observe(viewLifecycleOwner, { profiles ->
+            // Update the UI when the profiles data changes
+            profileAdapter.submitList(profiles)
+        })
+
+        binding.filterButton.setOnClickListener {
+            // Handle filter button click if needed
+        }
+
+        binding.sortButton.setOnClickListener {
+            // Handle sort button click if needed
         }
 
         return root

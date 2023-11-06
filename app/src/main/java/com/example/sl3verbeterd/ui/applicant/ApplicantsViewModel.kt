@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sl3verbeterd.HireHubDao
+import com.example.sl3verbeterd.Profile
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 
@@ -172,6 +173,7 @@ class ApplicantsViewModel(
         value = "This is applicants Fragment"
     }
     val text: LiveData<String> = _text
+    val profiles: LiveData<List<Profile>> = MutableLiveData()
 
 }
 

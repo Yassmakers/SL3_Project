@@ -1,5 +1,6 @@
 package com.example.sl3verbeterd
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,60 +15,57 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.sl3verbeterd.ui.applicant.ApplicantsActivity
 import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModel
+import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModelFactory
 import com.example.sl3verbeterd.ui.theme.ApplicantAndroidTheme
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MainActivity : AppCompatActivity() {
 
-//    private val db by lazy {
-//        Room.databaseBuilder(
-//            applicationContext,
-//            HireHubDatabase::class.java,
-//            "HireHub.db"
-//        ).build()
+
+//    private val ApplicantsViewModel: ApplicantsViewModel by viewModels {
+//        ApplicantsViewModelFactory((application as HireHubApplication).repository)
 //    }
 
+    private val newWordActivityRequestCode = 1
 
 
-
-
-//    private val viewModelAcc by viewModels<AccountViewModel>(
-//        factoryProducer = {
-//            object : ViewModelProvider.Factory {
-//                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//                    return AccountViewModel(db.daoAcc) as T
-//                }
-//            }
-//        }
-//    )
-
-
-    private lateinit var binding: ActivityMainBinding
+//    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
 
+        setContentView(R.layout.activity_main)
 
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener {
+            val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
+            startActivityForResult(intent, newWordActivityRequestCode)
+        }
 
+////
 //        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
 //        val adapter = ProfileListAdapter()
 //        recyclerView.adapter = adapter
 //        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val dao:HireHubDao = HireHubDatabase.getInstance(this).hireHubDao
+//        val dao:HireHubDao = HireHubDatabase.getInstance(this).hireHubDao
 
-        val viewModelPro by viewModels<ProfileViewModel>(
-            factoryProducer = {
-                object : ViewModelProvider.Factory {
-                    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                        return ProfileViewModel(dao) as T
-                    }
-                }
-            }
-        )
+//        val viewModelPro by viewModels<ProfileViewModel>(
+//            factoryProducer = {
+//                object : ViewModelProvider.Factory {
+//                    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//                        return ProfileViewModel(dao) as T
+//                    }
+//                }
+//            }
+//        )
 
 //        val viewModelApplicants by viewModels<ApplicantsViewModel>(
 //            factoryProducer = {
@@ -78,12 +76,12 @@ class MainActivity : AppCompatActivity() {
 //                }
 //            }
 //        )
-        setContent {
-            ApplicantAndroidTheme {
-                val state by viewModelPro.state.collectAsState()
-                ProfileScreen(state = state, onEvent = viewModelPro::onEvent)
-            }
-        }
+//        setContent {
+//            ApplicantAndroidTheme {
+//                val state by viewModelPro.state.collectAsState()
+//                ProfileScreen(state = state, onEvent = viewModelPro::onEvent)
+//            }
+//        }
 //        binding = ActivityMainBinding.inflate(layoutInflater)
 //        setContentView(binding.root)
 //

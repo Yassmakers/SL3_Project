@@ -5,16 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.compose.runtime.getValue
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.sl3verbeterd.HireHubApplication
 import com.example.sl3verbeterd.HireHubDao
 import com.example.sl3verbeterd.HireHubDatabase
 import com.example.sl3verbeterd.databinding.FragmentApplicantBinding
 
 
 class ApplicantsFragment : Fragment() {
+
 
     private var _binding: FragmentApplicantBinding? = null
 

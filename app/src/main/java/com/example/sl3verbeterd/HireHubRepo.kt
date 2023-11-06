@@ -16,29 +16,29 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
     suspend fun insertProfile(profile: Profile) {
         hireHubDao.insertProfile(profile)
     }
-
-    suspend fun deleteProfile(profile: Profile) {
-        hireHubDao.deleteProfile(profile)
-    }
-
-    suspend fun upsertProfile(profile: Profile) {
-        hireHubDao.upsertProfile(profile)
-
-    }
-
-    fun getProfilesOrderedByPhoneNumber(): Flow<List<Profile>> {
-      return  hireHubDao.getProfilesOrderedByPhoneNumber()
-    }
-
-    fun getProfilesOrderedByFirstName(): Flow<List<Profile>> {
-return hireHubDao.getProfilesOrderedByFirstName()
-    }
-
-   fun getProfilesOrderedByLastName(): Flow<List<Profile>> {
- return hireHubDao.getProfilesOrderedByLastName()
-    }
-
-    suspend fun updateProfile(firstName: String, id: Int) {
-hireHubDao.updateProfile(firstName, id)
-    }
+//
+//    suspend fun deleteProfile(profile: Profile) {
+//        hireHubDao.deleteProfile(profile)
+//    }
+//
+//    suspend fun upsertProfile(profile: Profile) {
+//        hireHubDao.upsertProfile(profile)
+//
+//    }
+//
+//    fun getProfilesOrderedByPhoneNumber(): Flow<List<Profile>> {
+//      return  hireHubDao.getProfilesOrderedByPhoneNumber()
+//    }
+//
+//    fun getProfilesOrderedByFirstName(): Flow<List<Profile>> {
+//return hireHubDao.getProfilesOrderedByFirstName()
+//    }
+//
+//   fun getProfilesOrderedByLastName(): Flow<List<Profile>> {
+// return hireHubDao.getProfilesOrderedByLastName()
+//    }
+//
+//    suspend fun updateProfile(firstName: String, id: Int) {
+//hireHubDao.updateProfile(firstName, id)
+//    }
 }

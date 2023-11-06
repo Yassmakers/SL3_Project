@@ -1,6 +1,10 @@
 package com.example.sl3verbeterd
 
 import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -15,6 +19,9 @@ interface HireHubDao {
 
     @Delete
     suspend fun deleteProfile(profile: Profile)
+
+    @Query("DELETE FROM profile")
+    suspend fun deleteAll()
 
 
     //Custom Queries

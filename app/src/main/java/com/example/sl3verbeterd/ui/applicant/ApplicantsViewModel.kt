@@ -26,6 +26,12 @@ class ApplicantsViewModel(
         repository.insertProfile(profile)
     }
 
+    fun deleteProfile(profile: Profile) = viewModelScope.launch {
+        repository.deleteProfile(profile)
+    }
+
+
+
 //    private val _sortType = MutableStateFlow(SortType.FIRST_NAME)
 //    private val _profiles = _sortType
 //        .flatMapLatest { sortType ->

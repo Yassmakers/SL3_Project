@@ -9,19 +9,31 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sl3verbeterd.ProfileListAdapter.ProfileViewHolder
-class ProfileListAdapter : ListAdapter<Profile, ProfileViewHolder>(PROFILES_COMPARATOR) {
+class ProfileListAdapter: ListAdapter<Profile, ProfileViewHolder>(PROFILES_COMPARATOR) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
+
+
+
+
         return ProfileViewHolder.create(parent)
     }
+
+
 
     override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current.firstName)
+
+
+
     }
+
 
     class ProfileViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val profileItemView: TextView = itemView.findViewById(R.id.textView)
+
 
         fun bind(text: String?) {
             profileItemView.text = text
@@ -31,10 +43,17 @@ class ProfileListAdapter : ListAdapter<Profile, ProfileViewHolder>(PROFILES_COMP
             fun create(parent: ViewGroup): ProfileViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.recyclerview_profiles, parent, false)
+
+
+
                 return ProfileViewHolder(view)
             }
+
+
         }
     }
+
+
 
     companion object {
         private val PROFILES_COMPARATOR = object : DiffUtil.ItemCallback<Profile>() {
@@ -47,4 +66,6 @@ class ProfileListAdapter : ListAdapter<Profile, ProfileViewHolder>(PROFILES_COMP
             }
         }
     }
+
+
 }

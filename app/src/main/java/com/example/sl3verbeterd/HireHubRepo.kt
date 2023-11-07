@@ -17,9 +17,9 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
         hireHubDao.insertProfile(profile)
     }
 //
-//    suspend fun deleteProfile(profile: Profile) {
-//        hireHubDao.deleteProfile(profile)
-//    }
+    suspend fun deleteProfile(profile: Profile) {
+        hireHubDao.deleteProfile(profile)
+    }
 //
 //    suspend fun upsertProfile(profile: Profile) {
 //        hireHubDao.upsertProfile(profile)

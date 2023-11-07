@@ -25,18 +25,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
  * Activity for entering a word.
  */
 
-class ApplicantsActivity : AppCompatActivity() {
+class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListener {
 
     private val newWordActivityRequestCode = 1
     private val applicantsViewModel: ApplicantsViewModel by viewModels {
         ApplicantsViewModelFactory((applicationContext as HireHubApplication).repository)
     }
 
-    public override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_applicants)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = ProfileListAdapter()
+        val adapter = ProfileListAdapter(this) // Initialize adapter with the listener
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -57,6 +57,15 @@ class ApplicantsActivity : AppCompatActivity() {
 
 
     }
+        override fun onProfileClick(profile: Profile) {
+            // Handle profile click
+        }
+
+    override fun onDeleteClick(profile: Profile) {
+        applicantsViewModel.deleteProfile(profile)
+    }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
         super.onActivityResult(requestCode, resultCode, intentData)

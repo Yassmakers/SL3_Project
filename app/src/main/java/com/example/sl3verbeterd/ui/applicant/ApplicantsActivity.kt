@@ -40,11 +40,11 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-//        val fab = findViewById<FloatingActionButton>(R.id.fab)
-//        fab.setOnClickListener {
-//            val intent = Intent(this@ApplicantsActivity, ApplicantsActivity::class.java)
-//            startActivityForResult(intent, newWordActivityRequestCode)
-//        }
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener {
+            val intent = Intent(this@ApplicantsActivity, NewApplicantsActivity::class.java)
+            startActivityForResult(intent, newWordActivityRequestCode)
+        }
 
 
         // Add an observer on the LiveData returned by getAlphabetizedWords.
@@ -60,6 +60,10 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         override fun onProfileClick(profile: Profile) {
             // Handle profile click
         }
+
+    override fun onAddProfileClick(profile: Profile) {
+        applicantsViewModel.insertProfile(profile)
+    }
 
     override fun onDeleteClick(profile: Profile) {
         applicantsViewModel.deleteProfile(profile)

@@ -83,6 +83,14 @@ abstract class HireHubDatabase: RoomDatabase() {
           hireHubDao.insertProfile(profile)
             profile = Profile("Yass", "Messa", "07")
             hireHubDao.insertProfile(profile)
+            profile = Profile("Yass", "Messa", "07")
+            hireHubDao.insertProfile(profile)
+            profile = Profile("Yass", "Messa", "07")
+            hireHubDao.insertProfile(profile)
+            profile = Profile("Yass", "Messa", "07")
+            hireHubDao.insertProfile(profile)
+            profile = Profile("Yass", "Messa", "07")
+            hireHubDao.insertProfile(profile)
         }
 
 

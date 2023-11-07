@@ -16,6 +16,7 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
         fun onProfileClick(profile: Profile)
         fun onDeleteClick(profile: Profile)
         fun onAddProfileClick(profile: Profile)
+        fun onUpdateProfileClick(profile: Profile)
     }
 
 
@@ -37,6 +38,7 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
         private val profileItemView: TextView = itemView.findViewById(R.id.textView)
         private val deleteButton: Button = itemView.findViewById(R.id.button_delete)
         private val addButton: Button = itemView.findViewById(R.id.button_add)
+        private val updateButton: Button = itemView.findViewById(R.id.button_update)
 
         fun bind(profile: Profile, clickListener: ProfileClickListener) {
             profileItemView.text = profile.firstName
@@ -47,6 +49,9 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
 
             // Set click listener for the add button
             addButton.setOnClickListener { clickListener.onAddProfileClick(profile) }
+
+            // Set click listener for the update button
+            updateButton.setOnClickListener { clickListener.onUpdateProfileClick(profile) }
         }
 
         companion object {

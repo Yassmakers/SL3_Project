@@ -24,6 +24,9 @@ interface HireHubDao {
     suspend fun deleteAll()
 
 
+       @Update
+    suspend fun updateProfile(profile: Profile)
+
     //Custom Queries
 
     // Flow is a data structure that observes any changes in the list.
@@ -38,8 +41,8 @@ interface HireHubDao {
     fun getProfilesOrderedByPhoneNumber(): Flow<List<Profile>>
 
 
-    @Query("UPDATE profile SET firstName=:firstName WHERE id LIKE :id")
-    suspend fun updateProfile(firstName: String, id: Int)
+//    @Query("UPDATE profile SET firstName=:firstName WHERE id LIKE :id")
+//    suspend fun updateProfile(firstName: String, id: Int)
 
 
 

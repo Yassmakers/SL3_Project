@@ -24,10 +24,15 @@ class ApplicantsViewModel(
 
     fun insertProfile(profile: Profile) = viewModelScope.launch {
         repository.insertProfile(profile)
+
     }
 
     fun deleteProfile(profile: Profile) = viewModelScope.launch {
         repository.deleteProfile(profile)
+    }
+
+    fun updateProfile(profile: Profile) = viewModelScope.launch {
+        repository.updateProfile(profile)
     }
 
 

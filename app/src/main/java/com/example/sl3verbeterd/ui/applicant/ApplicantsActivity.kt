@@ -62,11 +62,19 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         }
 
     override fun onAddProfileClick(profile: Profile) {
-        applicantsViewModel.insertProfile(profile)
+        val intent = Intent(this@ApplicantsActivity, NewApplicantsActivity::class.java)
+        startActivityForResult(intent, newWordActivityRequestCode)
+
     }
 
     override fun onDeleteClick(profile: Profile) {
         applicantsViewModel.deleteProfile(profile)
+    }
+
+    override fun onUpdateProfileClick(profile: Profile) {
+        val intent = Intent(this@ApplicantsActivity, UpdateApplicantsActivity::class.java)
+        startActivityForResult(intent, newWordActivityRequestCode)
+//        applicantsViewModel.updateProfile(profile)
     }
 
 
@@ -89,6 +97,6 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
     }
 
     companion object {
-        const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
+        const val EXTRA_REPLY = "com.example.sl3verbeterd.REPLY"
     }
 }

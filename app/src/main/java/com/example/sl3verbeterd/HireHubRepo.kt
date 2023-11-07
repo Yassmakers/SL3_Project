@@ -41,4 +41,8 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
 //    suspend fun updateProfile(firstName: String, id: Int) {
 //hireHubDao.updateProfile(firstName, id)
 //    }
+
+    suspend fun updateProfile(profile: Profile) {
+        hireHubDao.updateProfile(profile)
+    }
 }

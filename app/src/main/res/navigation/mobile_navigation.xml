@@ -24,11 +24,20 @@
         tools:layout="@layout/fragment_profile" />
 
 
-    <fragment
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_applicant"-->
+<!--        android:name="com.example.sl3verbeterd.ui.applicant.ApplicantsFragment"-->
+<!--        android:label="Sollicitanten"-->
+<!--        tools:layout="@layout/fragment_applicant" />-->
+
+    <activity
         android:id="@+id/navigation_applicant"
-        android:name="com.example.sl3verbeterd.ui.applicant.ApplicantsFragment"
+        android:name="com.example.sl3verbeterd.ui.applicant.ApplicantsActivity"
         android:label="Sollicitanten"
-        tools:layout="@layout/fragment_applicant" />
+        tools:layout="@layout/activity_applicants"
+        />
+
+
 
 
 </navigation>

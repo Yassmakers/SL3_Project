@@ -34,69 +34,37 @@ class MainActivity : AppCompatActivity() {
     private val newWordActivityRequestCode = 1
 
 
-//    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
 
-        setContentView(R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
 
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener {
-            val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode)
-        }
-
-////
-//        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-//        val adapter = ProfileListAdapter()
-//        recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-
-//        val dao:HireHubDao = HireHubDatabase.getInstance(this).hireHubDao
-
-//        val viewModelPro by viewModels<ProfileViewModel>(
-//            factoryProducer = {
-//                object : ViewModelProvider.Factory {
-//                    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//                        return ProfileViewModel(dao) as T
-//                    }
-//                }
-//            }
-//        )
-
-//        val viewModelApplicants by viewModels<ApplicantsViewModel>(
-//            factoryProducer = {
-//                object : ViewModelProvider.Factory {
-//                    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//                        return ApplicantsViewModel(dao) as T
-//                    }
-//                }
-//            }
-//        )
-//        setContent {
-//            ApplicantAndroidTheme {
-//                val state by viewModelPro.state.collectAsState()
-//                ProfileScreen(state = state, onEvent = viewModelPro::onEvent)
-//            }
+//        val fab = findViewById<FloatingActionButton>(R.id.fab)
+//        fab.setOnClickListener {
+//            val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
+//            startActivityForResult(intent, newWordActivityRequestCode)
 //        }
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
 //
-//        val navView: BottomNavigationView = binding.navView
 //
-//        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+//
+        val navView: BottomNavigationView = binding.navView
+
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
 //        // Passing each menu ID as a set of Ids because each
 //        // menu should be considered as top level destinations.
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_applicant, R.id.navigation_profile
-//            )
-//        )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//        navView.setupWithNavController(navController)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_applicant, R.id.navigation_profile
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
 }

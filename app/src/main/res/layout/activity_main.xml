@@ -15,22 +15,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         >
 
-    <Button
-        android:id="@+id/nav_home_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_red_dark"
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:text="Home"
-        />
-    <Button
-        android:id="@+id/nav_applicants_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_red_dark"
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:text="Applicants"
-        />
+        <Button
+            android:id="@+id/nav_home_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_red_dark"
+            android:textColor="@drawable/bottom_nav_button_selector"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="Home"
+            />
+        <Button
+            android:id="@+id/nav_applicants_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_red_dark"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="Applicants"
+            />
 
     <Button
         android:id="@+id/nav_profile_button"

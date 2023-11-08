@@ -6,25 +6,21 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
-import com.example.sl3verbeterd.Account
 import com.example.sl3verbeterd.HireHubApplication
 import com.example.sl3verbeterd.HireHubDao
 import com.example.sl3verbeterd.HireHubDatabase
 import com.example.sl3verbeterd.MainActivity
-import com.example.sl3verbeterd.Profile
 import com.example.sl3verbeterd.R
+import androidx.lifecycle.viewModelScope
 import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModel
 import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModelFactory
-import com.example.sl3verbeterd.ui.applicant.UpdateApplicantsActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
-import androidx.lifecycle.viewModelScope
-import androidx.activity.viewModels
 
 class LoginActivity : AppCompatActivity()  {
 
     private lateinit var hireHubDao: HireHubDao
     private val applicationScope = (application as HireHubApplication).applicationScope
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -38,16 +34,17 @@ class LoginActivity : AppCompatActivity()  {
             val editTextLoginPassword = findViewById<EditText>(R.id.editTextLoginPassword)
             val password = editTextLoginPassword.text.toString()
 
-            viewModelScope.launch {
-                val user = hireHubDao.getUserByUsername(username)
-                if (user != null && user.password == password) {
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    val intent = Intent(this@LoginActivity, LandingActivity::class.java)
-                    startActivity(intent)
-                }
-            }
+//
+//            viewModelScope.launch {
+//                val user = hireHubDao.getUserByUsername(username)
+//                if (user != null && user.password == password) {
+//                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//                    startActivity(intent)
+//                } else {
+//                    val intent = Intent(this@LoginActivity, LandingActivity::class.java)
+//                    startActivity(intent)
+//                }
+//            }
         }
 
         }

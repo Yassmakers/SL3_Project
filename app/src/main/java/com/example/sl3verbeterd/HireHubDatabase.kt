@@ -18,9 +18,6 @@ import kotlinx.coroutines.launch
 )
 abstract class HireHubDatabase: RoomDatabase() {
 
-    //  abstract fun daoPro(): ProfileDao
-//    abstract val hireHubDao: HireHubDao
-    // abstract val accPro: AccountDao
     abstract fun hireHubDao(): HireHubDao
 
     companion object {
@@ -51,7 +48,6 @@ abstract class HireHubDatabase: RoomDatabase() {
                 instance
             }
         }
-
 
 
         private class HireHubDatabaseCallback(

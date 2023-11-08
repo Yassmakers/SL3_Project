@@ -10,6 +10,7 @@ import com.example.sl3verbeterd.Account
 import com.example.sl3verbeterd.HireHubDao
 import com.example.sl3verbeterd.HireHubRepository
 import com.example.sl3verbeterd.Profile
+import com.example.sl3verbeterd.ui.auth.AccountState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -19,10 +20,10 @@ class ApplicantsViewModel(
      private val repository: HireHubRepository
 ) : ViewModel() {
 
-
+    private val state = MutableStateFlow(AccountState())
 
     val allProfiles: LiveData<List<Profile>> = repository.allProfiles.asLiveData()
-    val allAccounts: LiveData<List<Account>> = repository.allAccounts.asLiveData()
+//    val allAccounts: LiveData<List<Account>> = repository.allAccounts.asLiveData()
 
     fun insertProfile(profile: Profile) = viewModelScope.launch {
         repository.insertProfile(profile)

@@ -53,11 +53,11 @@ interface HireHubDao {
 //    @Query("UPDATE profile SET firstName=:firstName WHERE id LIKE :id")
 //    suspend fun updateProfile(firstName: String, id: Int)
     @Query("SELECT * FROM account WHERE username = :username")
-    suspend fun getUserByUsername(username: String)
+    suspend fun getUserByUsername(username: String) : Account?
 
 
-    @Query("SELECT * FROM account ORDER BY username ASC")
-    fun getAccountsOrderedByUsername(): Flow<List<Account>>
+//    @Query("SELECT * FROM account ORDER BY username ASC")
+//    fun getAccountsOrderedByFirstName(): Flow<List<Profile>>
 
 
 

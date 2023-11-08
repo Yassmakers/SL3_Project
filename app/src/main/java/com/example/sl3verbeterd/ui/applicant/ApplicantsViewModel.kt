@@ -1,4 +1,9 @@
 package com.example.sl3verbeterd.ui.applicant
+import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModelFactory
+import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
+import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModel
+
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,7 +24,15 @@ import kotlinx.coroutines.launch
 class ApplicantsViewModel(
      private val repository: HireHubRepository
 ) : ViewModel() {
+    private val _loginSuccess = MutableLiveData<Boolean>()
+    val loginSuccess: LiveData<Boolean> get() = _loginSuccess
 
+    fun loginUser(username: String, password: String) {
+        viewModelScope.launch {
+            val user = repository.getUserByUsername(username)
+            _loginSuccess.value = user != null && user.password == password
+        }
+    }
     private val state = MutableStateFlow(AccountState())
 
     val allProfiles: LiveData<List<Profile>> = repository.allProfiles.asLiveData()

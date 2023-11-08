@@ -1,5 +1,8 @@
 package com.example.sl3verbeterd
-
+import com.example.sl3verbeterd.HireHubRepository
+import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModelFactory
+import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.Dao

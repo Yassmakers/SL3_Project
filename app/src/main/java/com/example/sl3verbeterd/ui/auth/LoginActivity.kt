@@ -53,6 +53,8 @@ class LoginActivity : AppCompatActivity() {
         viewModel.loginSuccess.observe(this, Observer { isSuccess ->
             if (isSuccess) {
                 showLoginSuccessDialog()
+                // state id = accountid
+                // state role = guest
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
             } else {

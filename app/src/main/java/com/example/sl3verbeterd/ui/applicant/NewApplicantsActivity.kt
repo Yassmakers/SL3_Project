@@ -4,8 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -38,10 +43,33 @@ class NewApplicantsActivity : AppCompatActivity()  {
         val addLocation = findViewById<EditText>(R.id.location)
         val addJob = findViewById<EditText>(R.id.job)
 
-
-
-
         val button = findViewById<Button>(R.id.button_save)
+
+
+        // access the items of the list
+        val roles = resources.getStringArray(R.array.roles)
+
+        // access the spinner
+        val spinner = findViewById<Spinner>(R.id.spinner)
+        if (spinner != null) {
+            val adapter = ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, roles)
+            spinner.adapter = adapter
+
+            spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>,
+                                            view: View, position: Int, id: Long) {
+
+
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+            }
+        }
 
         button.setOnClickListener {
             // Profile
@@ -53,7 +81,7 @@ class NewApplicantsActivity : AppCompatActivity()  {
             // Account
             val userName = addUserName.text.toString()
             val passWord = addPassWord.text.toString()
-            val role = "user"
+            val role = spinner.selectedItem.toString()
             if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
                 val profile = Profile(firstName = firstName, lastName = lastName, location = location, job = job)
                 applicantsViewModel.insertProfile(profile)

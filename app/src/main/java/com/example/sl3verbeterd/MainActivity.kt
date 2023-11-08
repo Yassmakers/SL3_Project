@@ -17,8 +17,9 @@ class MainActivity : AppCompatActivity() {
         val navHome = findViewById<Button>(R.id.nav_home_button)
         navHome.setOnClickListener {
             val intent = Intent(this@MainActivity, MainActivity::class.java)
-
         }
+
+
 
         val navApplicants = findViewById<Button>(R.id.nav_applicants_button)
         navApplicants.setOnClickListener {

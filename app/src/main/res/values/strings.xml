@@ -10,4 +10,12 @@
     <string name="button_save">Save</string>
 
     <string name="add_word">Add word</string>
+
+    <string name="selected_roles">Selecteer Rol:</string>
+    <string-array name="roles">
+        <item>user</item>
+        <item>recruiter</item>
+        <item>admin</item>
+
+    </string-array>
 </resources>

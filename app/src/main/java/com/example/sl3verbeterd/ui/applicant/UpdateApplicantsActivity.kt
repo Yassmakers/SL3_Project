@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sl3verbeterd.Account
 import com.example.sl3verbeterd.HireHubApplication
 import com.example.sl3verbeterd.Profile
 
@@ -40,9 +41,15 @@ class UpdateApplicantsActivity : AppCompatActivity() {
         val id = intent.getStringExtra("id")!!.toInt()
 
 
+        // Account
+//        val addUserName = findViewById<EditText>(R.id.user_name)
+//        val addPassWord = findViewById<EditText>(R.id.password)
 
-        val AddFirstName = findViewById<EditText>(R.id.first_name)
-        val AddLastName = findViewById<EditText>(R.id.last_name)
+        // Profile
+        val addFirstName = findViewById<EditText>(R.id.first_name)
+        val addLastName = findViewById<EditText>(R.id.last_name)
+        val addLocation = findViewById<EditText>(R.id.location)
+        val addJob = findViewById<EditText>(R.id.job)
 
 
         val oldFirstName = intent.getStringExtra("oldFirstName").toString()
@@ -55,17 +62,39 @@ class UpdateApplicantsActivity : AppCompatActivity() {
             hint = oldLastName
         }
 
+        val oldLocation = intent.getStringExtra("oldLocation").toString()
+        findViewById<EditText>(R.id.location).apply{
+            hint =  oldLocation
+        }
+
+
+        val oldJob = intent.getStringExtra("oldJob").toString()
+        findViewById<EditText>(R.id.job).apply{
+            hint = oldJob
+        }
+
+
 
         val button = findViewById<Button>(R.id.button_save)
 
         button.setOnClickListener {
-            val firstName = AddFirstName.text.toString()
-            val lastName = AddLastName.text.toString()
+            // Profile
+            val firstName = addFirstName.text.toString()
+            val lastName = addLastName.text.toString()
+            val location = addLocation.text.toString()
+            val job = addJob.text.toString()
+
+            // Account
+//            val userName = addUserName.text.toString()
+//            val passWord = addPassWord.text.toString()
+//            val role = "user"
+
 
             if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
-                val profile = Profile(firstName = firstName, lastName = lastName, phoneNumber = "PlaceHolder", id = id)
-
+                val profile = Profile(firstName = firstName, lastName = lastName, location = location, job = job, id = id)
                 applicantsViewModel.updateProfile(profile)
+//                val account = Account(username = userName, password = passWord, role = role, id = id)
+//                applicantsViewModel.updateAccount(account)
                 val intent = Intent(this@UpdateApplicantsActivity, ApplicantsActivity::class.java)
                 startActivity(intent)
             }

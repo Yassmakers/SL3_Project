@@ -13,6 +13,8 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
     ListAdapter<Profile, ProfileListAdapter.ProfileViewHolder>(PROFILES_COMPARATOR) {
 
     interface ProfileClickListener {
+
+
         fun onProfileClick(profile: Profile)
         fun onDeleteClick(profile: Profile)
         fun onAddProfileClick(profile: Profile)

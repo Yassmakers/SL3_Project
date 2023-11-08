@@ -7,7 +7,9 @@ import androidx.room.PrimaryKey
 data class Profile(
     val firstName: String,
     val lastName: String,
-    val phoneNumber: String,
+    val location: String,
+    val job: String,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
+
 )

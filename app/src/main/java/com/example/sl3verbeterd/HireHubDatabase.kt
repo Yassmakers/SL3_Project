@@ -79,33 +79,35 @@ abstract class HireHubDatabase: RoomDatabase() {
             // Not needed if you only populate on creation.
             hireHubDao.deleteAll()
 
-           var profile = Profile("Jeffrey", "Tang", "07")
-          hireHubDao.insertProfile(profile)
-            profile = Profile("Yass", "Messa", "07")
+            // Admin
+                // Admin
+
+                var account = Account("DeAdmin", "DeAdmin123", "admin")
+                hireHubDao.insertAccount(account)
+                var profile = Profile("René", "Prinz", "Almere", "Docent ICT")
+                hireHubDao.insertProfile(profile)
+
+            // Recruiter
+
+            account = Account("DeRecruiter", "Recruiter123", "recruiter")
+            hireHubDao.insertAccount(account)
+            profile = Profile("Polina", "Kozlova", "Almere", "Docent ICT")
             hireHubDao.insertProfile(profile)
-            profile = Profile("Yass", "Messa", "07")
+
+            // User
+                // User 1
+            account = Account("Gebruiker1", "Gebruiker1123", "user")
+            hireHubDao.insertAccount(account)
+            profile = Profile("Jeffrey", "Tang", "Almere", "Software Developer")
             hireHubDao.insertProfile(profile)
-            profile = Profile("Yass", "Messa", "07")
+                // User 2
+            account = Account("Gebruiker2", "Gebruiker2123", "user")
+            hireHubDao.insertAccount(account)
+            profile = Profile("Yass", "Messa", "Almere", "Software Developer Jr")
             hireHubDao.insertProfile(profile)
-            profile = Profile("Yass", "Messa", "07")
-            hireHubDao.insertProfile(profile)
-            profile = Profile("Yass", "Messa", "07")
-            hireHubDao.insertProfile(profile)
+
+
         }
-
-
-
-//        fun getInstance(context: Context): HireHubDatabase {
-//            synchronized(this) {
-//                return INSTANCE ?: Room.databaseBuilder(
-//                    context.applicationContext,
-//                    HireHubDatabase::class.java,
-//                    "HireHubDatabase"
-//                ).build().also {
-//                    INSTANCE = it
-//                }
-//            }
-//        }
 
 
     }

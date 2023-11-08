@@ -34,6 +34,14 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
         return hireHubDao.showProfile(id)
     }
 
+    suspend fun insertAccount(account: Account) {
+        hireHubDao.insertAccount(account)
+    }
+
+    suspend fun updateAccount(account: Account) {
+        hireHubDao.updateAccount(account)
+    }
+
 //
 //    suspend fun upsertProfile(profile: Profile) {
 //        hireHubDao.upsertProfile(profile)

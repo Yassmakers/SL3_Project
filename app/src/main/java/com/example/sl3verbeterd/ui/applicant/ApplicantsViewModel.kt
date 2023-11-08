@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.sl3verbeterd.Account
 import com.example.sl3verbeterd.HireHubDao
 import com.example.sl3verbeterd.HireHubRepository
 import com.example.sl3verbeterd.Profile
@@ -27,6 +28,11 @@ class ApplicantsViewModel(
 
     }
 
+    fun insertAccount(account: Account) = viewModelScope.launch {
+        repository.insertAccount(account)
+
+    }
+
     fun showProfile(id: Int) = viewModelScope.launch {
         repository.showProfile(id)
 
@@ -38,6 +44,10 @@ class ApplicantsViewModel(
 
     fun updateProfile(profile: Profile) = viewModelScope.launch {
         repository.updateProfile(profile)
+    }
+
+    fun updateAccount(account: Account) = viewModelScope.launch {
+        repository.updateAccount(account)
     }
 
 

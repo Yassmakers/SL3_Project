@@ -32,6 +32,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.sl3verbeterd.Account
 import com.example.sl3verbeterd.MainActivity
 import com.example.sl3verbeterd.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -123,14 +124,24 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
             .show()
     }
 
+//            fun onUpdateAccountClick(account: Account){
+//            // Account
+//            intent.putExtra("accountID", "${account.id}")
+//            intent.putExtra("oldUsername", account.username)
+//            intent.putExtra("oldPassword", account.username)
+//        }
+
     override fun onUpdateProfileClick(profile: Profile) {
-//        val id = "${profile.id}".toInt()
-//        val userProfile = applicantsViewModel.showProfile(id)
-//        applicantsViewModel.updateProfile(profile)
+        // Profile
+
         val intent = Intent(this@ApplicantsActivity, UpdateApplicantsActivity::class.java)
+
+
         intent.putExtra("id", "${profile.id}")
         intent.putExtra("oldFirstName", profile.firstName)
         intent.putExtra("oldLastName", profile.lastName)
+        intent.putExtra("oldLocation", profile.location)
+        intent.putExtra("oldJob", profile.job)
 
         startActivity(intent)
     }
@@ -143,7 +154,7 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
 
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
             intentData?.getStringExtra(ApplicantsActivity.EXTRA_REPLY)?.let { reply ->
-                val profile = Profile(reply, reply, reply)
+                val profile = Profile(reply, reply, reply, reply)
                 applicantsViewModel.insertProfile(profile)
             }
         } else {

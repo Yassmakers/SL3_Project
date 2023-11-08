@@ -52,6 +52,8 @@ abstract class HireHubDatabase: RoomDatabase() {
             }
         }
 
+
+
         private class HireHubDatabaseCallback(
             private val scope: CoroutineScope
         ) : RoomDatabase.Callback() {
@@ -69,6 +71,20 @@ abstract class HireHubDatabase: RoomDatabase() {
                 }
             }
         }
+
+        fun getInstance(context: Context): HireHubDatabase {
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    HireHubDatabase::class.java,
+                    "HireHubDatabase"
+                ).build()
+                INSTANCE = instance
+                instance
+            }
+        }
+
+
 
         /**
          * Populate the database in a new coroutine.
@@ -111,4 +127,6 @@ abstract class HireHubDatabase: RoomDatabase() {
 
 
     }
+
+
 }

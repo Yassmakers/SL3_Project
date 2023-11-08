@@ -1,6 +1,4 @@
 package com.example.sl3verbeterd
-//import com.example.sl3verbeterd.ui.profile.ProfilesActivity
-//import com.example.sl3verbeterd.ui.dashboard.DashboardActivity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -19,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         val navHome = findViewById<Button>(R.id.nav_home_button)
         navHome.setOnClickListener {
             val intent = Intent(this@MainActivity, MainActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode)
+
         }
 
         val navApplicants = findViewById<Button>(R.id.nav_applicants_button)

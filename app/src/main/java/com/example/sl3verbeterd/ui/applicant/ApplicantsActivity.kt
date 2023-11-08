@@ -55,6 +55,7 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_applicants)
+
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = ProfileListAdapter(this) // Initialize adapter with the listener
         recyclerView.adapter = adapter
@@ -94,12 +95,7 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         }
 
     override fun showProfile(id: Int) {
-
                 applicantsViewModel.showProfile(id)
-
-//        applicantsViewModel.updateProfile(profile)
-//        val intent = Intent(this@ApplicantsActivity, UpdateApplicantsActivity::class.java)
-//        startActivityForResult(intent, newWordActivityRequestCode)
     }
 
     override fun onAddProfileClick(profile: Profile) {
@@ -127,25 +123,16 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
             .show()
     }
 
-//            fun onUpdateAccountClick(account: Account){
-//            // Account
-//            intent.putExtra("accountID", "${account.id}")
-//            intent.putExtra("oldUsername", account.username)
-//            intent.putExtra("oldPassword", account.username)
-//        }
+
 
     override fun onUpdateProfileClick(profile: Profile) {
-        // Profile
 
         val intent = Intent(this@ApplicantsActivity, UpdateApplicantsActivity::class.java)
-
-
         intent.putExtra("id", "${profile.id}")
         intent.putExtra("oldFirstName", profile.firstName)
         intent.putExtra("oldLastName", profile.lastName)
         intent.putExtra("oldLocation", profile.location)
         intent.putExtra("oldJob", profile.job)
-
         startActivity(intent)
     }
 

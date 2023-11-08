@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:name=".HireHubApplication"
         android:allowBackup="true"
@@ -14,30 +16,39 @@
         android:theme="@style/Theme.Sl3Verbeterd"
         tools:targetApi="31">
         <activity
-            android:name=".ui.applicant.UpdateApplicantsActivity"
-            android:exported="false"
-            android:label="UpdateApplicants"/>
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false" />
         <activity
-            android:name=".ui.applicant.NewApplicantsActivity"
-            android:exported="false"
-            android:label="NewApplicants"/>
-
+            android:name=".ui.auth.RegisterActivity"
+            android:exported="false" />
         <activity
-            android:name=".ui.applicant.ApplicantsActivity"
-            android:exported="true"
-            android:label="Applicants"
-            />
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name">
+            android:name=".ui.auth.LandingActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.auth.AuthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.applicant.UpdateApplicantsActivity"
+            android:exported="false"
+            android:label="UpdateApplicants" />
+        <activity
+            android:name=".ui.applicant.NewApplicantsActivity"
+            android:exported="false"
+            android:label="NewApplicants" />
+        <activity
+            android:name=".ui.applicant.ApplicantsActivity"
+            android:exported="true"
+            android:label="Applicants" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

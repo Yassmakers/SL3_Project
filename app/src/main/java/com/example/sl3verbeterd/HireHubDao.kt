@@ -52,7 +52,8 @@ interface HireHubDao {
 
 //    @Query("UPDATE profile SET firstName=:firstName WHERE id LIKE :id")
 //    suspend fun updateProfile(firstName: String, id: Int)
-
+    @Query("SELECT * FROM account WHERE username = :username")
+    fun getUserByUsername(username: String) : Account?
 
 
 
@@ -70,6 +71,7 @@ interface HireHubDao {
 
     @Update
     suspend fun updateAccount(account: Account)
+
 
 
     //Custom Queries

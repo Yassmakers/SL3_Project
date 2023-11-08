@@ -44,8 +44,17 @@ class UpdateApplicantsActivity : AppCompatActivity() {
         val AddFirstName = findViewById<EditText>(R.id.first_name)
         val AddLastName = findViewById<EditText>(R.id.last_name)
 
-        AddFirstName.hint = intent.getStringExtra("oldFirstName").toString()
-       AddLastName.hint = intent.getStringExtra("oldLastName").toString()
+
+        val oldFirstName = intent.getStringExtra("oldFirstName").toString()
+        findViewById<EditText>(R.id.first_name).apply{
+            hint = oldFirstName
+        }
+
+        val oldLastName = intent.getStringExtra("oldLastName").toString()
+        findViewById<EditText>(R.id.last_name).apply{
+            hint = oldLastName
+        }
+
 
         val button = findViewById<Button>(R.id.button_save)
 

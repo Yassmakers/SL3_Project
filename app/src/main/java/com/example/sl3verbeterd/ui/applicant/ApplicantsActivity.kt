@@ -92,6 +92,15 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
             // Handle profile click
         }
 
+    override fun showProfile(id: Int) {
+
+                applicantsViewModel.showProfile(id)
+
+//        applicantsViewModel.updateProfile(profile)
+//        val intent = Intent(this@ApplicantsActivity, UpdateApplicantsActivity::class.java)
+//        startActivityForResult(intent, newWordActivityRequestCode)
+    }
+
     override fun onAddProfileClick(profile: Profile) {
         val intent = Intent(this@ApplicantsActivity, NewApplicantsActivity::class.java)
         startActivityForResult(intent, newWordActivityRequestCode)
@@ -115,9 +124,15 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
     }
 
     override fun onUpdateProfileClick(profile: Profile) {
-        val intent = Intent(this@ApplicantsActivity, UpdateApplicantsActivity::class.java)
-        startActivityForResult(intent, newWordActivityRequestCode)
+//        val id = "${profile.id}".toInt()
+//        val userProfile = applicantsViewModel.showProfile(id)
 //        applicantsViewModel.updateProfile(profile)
+        val intent = Intent(this@ApplicantsActivity, UpdateApplicantsActivity::class.java)
+        intent.putExtra("id", "${profile.id}")
+        intent.putExtra("oldFirstName", profile.firstName)
+        intent.putExtra("oldLastName", profile.lastName)
+
+        startActivity(intent)
     }
 
 

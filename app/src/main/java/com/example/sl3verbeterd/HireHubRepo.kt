@@ -1,6 +1,7 @@
 package com.example.sl3verbeterd
 
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 
 class HireHubRepository(private val hireHubDao: HireHubDao) {
@@ -20,6 +21,19 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
     suspend fun deleteProfile(profile: Profile) {
         hireHubDao.deleteProfile(profile)
     }
+
+    suspend fun updateProfile(profile: Profile) {
+        hireHubDao.updateProfile(profile)
+    }
+
+//    fun showProfile(id: Int) {
+//        hireHubDao.showProfile(id)
+//    }
+
+    fun showProfile (id: Int):LiveData<Profile> {
+        return hireHubDao.showProfile(id)
+    }
+
 //
 //    suspend fun upsertProfile(profile: Profile) {
 //        hireHubDao.upsertProfile(profile)
@@ -42,7 +56,5 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
 //hireHubDao.updateProfile(firstName, id)
 //    }
 
-    suspend fun updateProfile(profile: Profile) {
-        hireHubDao.updateProfile(profile)
-    }
+
 }

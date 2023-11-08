@@ -12,30 +12,34 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sl3verbeterd.HireHubApplication
+import com.example.sl3verbeterd.Profile
 import com.example.sl3verbeterd.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 class NewApplicantsActivity : AppCompatActivity()  {
 
+    private val applicantsViewModel: ApplicantsViewModel by viewModels {
+        ApplicantsViewModelFactory((applicationContext as HireHubApplication).repository)
+    }
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContentView(R.layout.activity_new_applicants)
-        val editWordView = findViewById<EditText>(R.id.edit_word)
+        val AddFirstName = findViewById<EditText>(R.id.first_name)
+        val AddLastName = findViewById<EditText>(R.id.last_name)
 
         val button = findViewById<Button>(R.id.button_save)
-        button.setOnClickListener {
-            val replyIntent = Intent()
-            if (TextUtils.isEmpty(editWordView.text)) {
-                setResult(Activity.RESULT_CANCELED, replyIntent)
-            } else {
-                val word = editWordView.text.toString()
-                replyIntent.putExtra(EXTRA_REPLY, word)
-                setResult(Activity.RESULT_OK, replyIntent)
-            }
-            finish()
-        }
-    }
 
-    companion object {
-        const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
+        button.setOnClickListener {
+            val firstName = AddFirstName.text.toString()
+            val lastName = AddLastName.text.toString()
+            if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
+                val profile = Profile(firstName = firstName, lastName = lastName, phoneNumber = "Placeholder")
+                applicantsViewModel.insertProfile(profile)
+                val intent = Intent(this@NewApplicantsActivity, ApplicantsActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 }

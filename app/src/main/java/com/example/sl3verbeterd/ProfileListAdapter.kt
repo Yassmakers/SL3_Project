@@ -17,6 +17,7 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
         fun onDeleteClick(profile: Profile)
         fun onAddProfileClick(profile: Profile)
         fun onUpdateProfileClick(profile: Profile)
+        fun showProfile(id: Int)
     }
 
 

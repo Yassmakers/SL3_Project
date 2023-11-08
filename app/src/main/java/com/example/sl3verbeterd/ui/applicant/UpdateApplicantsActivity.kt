@@ -9,6 +9,7 @@ import android.content.Intent
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -26,27 +27,42 @@ class UpdateApplicantsActivity : AppCompatActivity() {
     private val applicantsViewModel: ApplicantsViewModel by viewModels {
         ApplicantsViewModelFactory((applicationContext as HireHubApplication).repository)
     }
+
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
         setContentView(R.layout.activity_update_applicants)
+
+
+
+        val id = intent.getStringExtra("id")!!.toInt()
+
+
+
         val AddFirstName = findViewById<EditText>(R.id.first_name)
         val AddLastName = findViewById<EditText>(R.id.last_name)
+
+        AddFirstName.hint = intent.getStringExtra("oldFirstName").toString()
+       AddLastName.hint = intent.getStringExtra("oldLastName").toString()
 
         val button = findViewById<Button>(R.id.button_save)
 
         button.setOnClickListener {
             val firstName = AddFirstName.text.toString()
             val lastName = AddLastName.text.toString()
+
             if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
-                val profile = Profile(firstName = firstName, lastName = lastName, phoneNumber = "Placeholder")
-                applicantsViewModel.insertProfile(profile)
+                val profile = Profile(firstName = firstName, lastName = lastName, phoneNumber = "PlaceHolder", id = id)
+
+                applicantsViewModel.updateProfile(profile)
                 val intent = Intent(this@UpdateApplicantsActivity, ApplicantsActivity::class.java)
                 startActivity(intent)
             }
         }
     }
 }
+
 
 

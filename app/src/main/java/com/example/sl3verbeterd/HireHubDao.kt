@@ -1,5 +1,6 @@
 package com.example.sl3verbeterd
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.Dao
 import androidx.room.Insert
@@ -23,8 +24,14 @@ interface HireHubDao {
     @Query("DELETE FROM profile")
     suspend fun deleteAll()
 
+    @Query("SELECT * FROM profile WHERE id IS :id")
+    fun showProfile(id: Int) : LiveData<Profile>
 
-       @Update
+//    @Query("SELECT * FROM profile")
+//    fun showProfile(id: Int) : LiveData<Profile>
+
+
+    @Update
     suspend fun updateProfile(profile: Profile)
 
     //Custom Queries

@@ -27,6 +27,10 @@ interface HireHubDao {
     @Query("SELECT * FROM profile WHERE id IS :id")
     fun showProfile(id: Int) : LiveData<Profile>
 
+
+    @Query("DELETE FROM account WHERE id IS :id")
+    suspend fun deleteAccountToo(id: Int)
+
 //    @Query("SELECT * FROM profile")
 //    fun showProfile(id: Int) : LiveData<Profile>
 

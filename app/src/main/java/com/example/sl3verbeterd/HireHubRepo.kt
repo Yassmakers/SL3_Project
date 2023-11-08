@@ -22,6 +22,14 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
         hireHubDao.deleteProfile(profile)
     }
 
+    suspend fun deleteAccount(account: Account) {
+        hireHubDao.deleteAccount(account)
+    }
+
+    suspend fun deleteAccountToo(id: Int) {
+        hireHubDao.deleteAccountToo(id)
+    }
+
     suspend fun updateProfile(profile: Profile) {
         hireHubDao.updateProfile(profile)
     }

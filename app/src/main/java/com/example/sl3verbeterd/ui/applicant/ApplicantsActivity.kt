@@ -114,8 +114,11 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
             .setTitle("Delete Profile")
             .setMessage("Are you sure you want to delete ${profile.firstName} ${profile.lastName}?")
             .setPositiveButton("Yes") { _, _ ->
+                var id = "${profile.id}".toInt()
                 // User confirmed, delete the profile here
                 applicantsViewModel.deleteProfile(profile)
+                applicantsViewModel.deleteAccountToo(id)
+
             }
             .setNegativeButton("No") { dialog, _ ->
                 // User cancelled the delete operation, dismiss the dialog

@@ -42,6 +42,14 @@ class ApplicantsViewModel(
         repository.deleteProfile(profile)
     }
 
+    fun deleteAccount(account: Account) = viewModelScope.launch {
+        repository.deleteAccount(account)
+    }
+
+    fun deleteAccountToo(id: Int) = viewModelScope.launch {
+        repository.deleteAccountToo(id)
+    }
+
     fun updateProfile(profile: Profile) = viewModelScope.launch {
         repository.updateProfile(profile)
     }

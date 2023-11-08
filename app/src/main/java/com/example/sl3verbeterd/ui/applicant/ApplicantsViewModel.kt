@@ -21,16 +21,22 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class ApplicantsViewModel(
-     private val repository: HireHubRepository
-) : ViewModel() {
+class ApplicantsViewModel(private val repository: HireHubRepository) : ViewModel() {
     private val _loginSuccess = MutableLiveData<Boolean>()
     val loginSuccess: LiveData<Boolean> get() = _loginSuccess
+
+    private val _userRole = MutableLiveData<String>()
+    val userRole: LiveData<String> get() = _userRole
 
     fun loginUser(username: String, password: String) {
         viewModelScope.launch {
             val user = repository.getUserByUsername(username)
             _loginSuccess.value = user != null && user.password == password
+            if (_loginSuccess.value == true) {
+                _userRole.value = user?.role ?: "guest"
+            } else {
+                _userRole.value = "guest"
+            }
         }
     }
     private val state = MutableStateFlow(AccountState())

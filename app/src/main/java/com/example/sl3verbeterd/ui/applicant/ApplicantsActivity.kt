@@ -22,6 +22,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import android.app.Activity
 import android.app.Application
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -46,11 +47,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListener {
 
     private val newWordActivityRequestCode = 1
+    private lateinit var role: String // Declare role variable to store user's role
+
     private val applicantsViewModel: ApplicantsViewModel by viewModels {
         ApplicantsViewModelFactory((applicationContext as HireHubApplication).repository)
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +68,22 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
             startActivityForResult(intent, newWordActivityRequestCode)
         }
 
+        // Retrieve user's role from the intent extras
+        role = intent.getStringExtra("role") ?: "guest"
+        Log.d("ApplicantsActivity", "User Role in ApplicantsActivity: $role")
+
+        val navHome = findViewById<Button>(R.id.nav_home_button)
+        navHome.setOnClickListener {
+            val intent = Intent(this@ApplicantsActivity, MainActivity::class.java)
+            intent.putExtra("role", role) // Pass the user's role to MainActivity
+            startActivityForResult(intent, newWordActivityRequestCode)
+        }
+
+        val navApplicants = findViewById<Button>(R.id.nav_applicants_button)
+        navApplicants.setOnClickListener {
+            // Implement the behavior for the applicants button based on the user's role
+            // Use the 'role' variable here to check user's role
+        }
 
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
@@ -75,27 +92,14 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
             // Update the cached copy of the words in the adapter.
             profiles.let { adapter.submitList(it) }
         }
-
-        val navHome = findViewById<Button>(R.id.nav_home_button)
-        navHome.setOnClickListener {
-            val intent = Intent(this@ApplicantsActivity, MainActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode)
-        }
-
-        val navApplicants = findViewById<Button>(R.id.nav_applicants_button)
-        navApplicants.setOnClickListener {
-            val intent = Intent(this@ApplicantsActivity, ApplicantsActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode)
-        }
-
-
     }
-        override fun onProfileClick(profile: Profile) {
-            // Handle profile click
-        }
+
+    override fun onProfileClick(profile: Profile) {
+        // Handle profile click
+    }
 
     override fun showProfile(id: Int) {
-                applicantsViewModel.showProfile(id)
+        applicantsViewModel.showProfile(id)
     }
 
     override fun onAddProfileClick(profile: Profile) {

@@ -28,7 +28,8 @@
 <!--        android:id="@+id/navigation_applicant"-->
 <!--        android:name="com.example.sl3verbeterd.ui.applicant.ApplicantsFragment"-->
 <!--        android:label="Sollicitanten"-->
-<!--        tools:layout="@layout/fragment_applicant" />-->
+<!--        tools:layout="@layout/fragment_applicant"-->
+<!--        />-->
 
     <activity
         android:id="@+id/navigation_applicant"

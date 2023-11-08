@@ -2,6 +2,7 @@ package com.example.sl3verbeterd
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.compose.setContent
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavAction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sl3verbeterd.ui.applicant.ApplicantsActivity
@@ -27,44 +29,46 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class MainActivity : AppCompatActivity() {
 
 
-//    private val ApplicantsViewModel: ApplicantsViewModel by viewModels {
-//        ApplicantsViewModelFactory((application as HireHubApplication).repository)
-//    }
-
     private val newWordActivityRequestCode = 1
 
 
-    private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
 
-//        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
-//        val fab = findViewById<FloatingActionButton>(R.id.fab)
-//        fab.setOnClickListener {
-//            val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
+
+
+
+
+        val navHome = findViewById<Button>(R.id.nav_home_button)
+        navHome.setOnClickListener {
+            val intent = Intent(this@MainActivity, MainActivity::class.java)
+            startActivityForResult(intent, newWordActivityRequestCode)
+        }
+
+        val navApplicants = findViewById<Button>(R.id.nav_applicants_button)
+        navApplicants.setOnClickListener {
+            val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
+            startActivityForResult(intent, newWordActivityRequestCode)
+        }
+
+//        val navProfile = findViewById<Button>(R.id.nav_profile_button)
+//        navProfile.setOnClickListener {
+//            val intent = Intent(this@MainActivity, ProfilesActivity::class.java)
 //            startActivityForResult(intent, newWordActivityRequestCode)
 //        }
-//
-//
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-//
-        val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-//        // Passing each menu ID as a set of Ids because each
-//        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_applicant, R.id.navigation_profile
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+//        val navDashboard = findViewById<Button>(R.id.nav_dashboard_button)
+//        navDashboard.setOnClickListener {
+//            val intent = Intent(this@MainActivity, DashboardActivity::class.java)
+//            startActivityForResult(intent, newWordActivityRequestCode)
+//        }
+
     }
 
 }

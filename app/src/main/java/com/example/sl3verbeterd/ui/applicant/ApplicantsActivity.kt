@@ -28,6 +28,13 @@ import android.widget.Toast
 import androidx.activity.viewModels
 
 import androidx.lifecycle.observe
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.example.sl3verbeterd.MainActivity
+import com.example.sl3verbeterd.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -41,6 +48,8 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
     private val applicantsViewModel: ApplicantsViewModel by viewModels {
         ApplicantsViewModelFactory((applicationContext as HireHubApplication).repository)
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +72,18 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         applicantsViewModel.allProfiles.observe(owner = this) { profiles ->
             // Update the cached copy of the words in the adapter.
             profiles.let { adapter.submitList(it) }
+        }
+
+        val navHome = findViewById<Button>(R.id.nav_home_button)
+        navHome.setOnClickListener {
+            val intent = Intent(this@ApplicantsActivity, MainActivity::class.java)
+            startActivityForResult(intent, newWordActivityRequestCode)
+        }
+
+        val navApplicants = findViewById<Button>(R.id.nav_applicants_button)
+        navApplicants.setOnClickListener {
+            val intent = Intent(this@ApplicantsActivity, ApplicantsActivity::class.java)
+            startActivityForResult(intent, newWordActivityRequestCode)
         }
 
 

@@ -9,6 +9,7 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
     val allProfiles: Flow<List<Profile>> = hireHubDao.getProfilesOrderedByFirstName()
+    val allAccounts: Flow<List<Account>> = hireHubDao.getAccountsOrderedByUsername()
 
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work
@@ -37,6 +38,12 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
 //    fun showProfile(id: Int) {
 //        hireHubDao.showProfile(id)
 //    }
+
+
+    suspend fun getUserByUsername(username: String){
+        hireHubDao.getUserByUsername(username)
+
+    }
 
     fun showProfile (id: Int):LiveData<Profile> {
         return hireHubDao.showProfile(id)

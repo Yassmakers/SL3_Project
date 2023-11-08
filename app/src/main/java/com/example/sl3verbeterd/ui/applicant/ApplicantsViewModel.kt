@@ -22,6 +22,7 @@ class ApplicantsViewModel(
 
 
     val allProfiles: LiveData<List<Profile>> = repository.allProfiles.asLiveData()
+    val allAccounts: LiveData<List<Account>> = repository.allAccounts.asLiveData()
 
     fun insertProfile(profile: Profile) = viewModelScope.launch {
         repository.insertProfile(profile)
@@ -56,6 +57,10 @@ class ApplicantsViewModel(
 
     fun updateAccount(account: Account) = viewModelScope.launch {
         repository.updateAccount(account)
+    }
+
+    suspend fun getUserByUsername(username: String) = viewModelScope.launch {
+        repository.getUserByUsername(username)
     }
 
 

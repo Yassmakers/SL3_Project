@@ -39,6 +39,10 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
         hireHubDao.insertAccount(account)
     }
 
+    // Public method to get profile by ID
+    fun getProfileById(profileId: Int): LiveData<Profile> {
+        return hireHubDao.getProfileById(profileId)
+    }
     suspend fun updateAccount(account: Account) {
         hireHubDao.updateAccount(account)
     }

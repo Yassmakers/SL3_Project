@@ -98,6 +98,15 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         // Handle profile click
     }
 
+    override fun onShowDetailsClick(id: Int) {
+        // Implement the behavior for showing profile details based on the provided id.
+        // You can navigate to a new activity or fragment to show the details.
+        // Example:
+        val intent = Intent(this@ApplicantsActivity, ProfileDetailsActivity::class.java)
+        intent.putExtra("profileId", id)
+        startActivity(intent)
+    }
+
     override fun showProfile(id: Int) {
         applicantsViewModel.showProfile(id)
     }

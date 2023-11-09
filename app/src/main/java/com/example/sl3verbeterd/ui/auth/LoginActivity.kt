@@ -29,11 +29,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         hireHubDao = HireHubDatabase.getDatabase(this, applicationScope).hireHubDao()
-// Initialize the database here if needed
-        HireHubDatabase.getDatabase(this, applicationScope)
+
         val loginButton = findViewById<Button>(R.id.login_button)
         val editTextLoginUser = findViewById<EditText>(R.id.editTextLoginUser)
         val editTextLoginPassword = findViewById<EditText>(R.id.editTextLoginPassword)
+        val registerButton = findViewById<Button>(R.id.register_button)
+        val guestButton = findViewById<Button>(R.id.guest_button)
 
         loginButton.setOnClickListener {
             val username = editTextLoginUser.text.toString()
@@ -60,9 +61,21 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         showLoginFailureDialog()
                     }
-
                 }
             }
+        }
+
+        registerButton.setOnClickListener {
+            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        guestButton.setOnClickListener {
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            // Set the user role as "guest" to indicate guest user
+            intent.putExtra("role", "guest")
+            startActivity(intent)
+            finish() // Finish LoginActivity to prevent going back on continuing as a guest
         }
     }
 

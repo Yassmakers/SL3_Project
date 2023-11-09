@@ -51,6 +51,8 @@ interface HireHubDao {
     @Query("SELECT * FROM profile ORDER BY lastName ASC")
     fun getProfilesOrderedByLastName(): Flow<List<Profile>>
 
+    @Query("SELECT * FROM profile WHERE id = :profileId")
+    fun getProfileById(profileId: Int): LiveData<Profile>
 
 
 //    @Query("UPDATE profile SET firstName=:firstName WHERE id LIKE :id")

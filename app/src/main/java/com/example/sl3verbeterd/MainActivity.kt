@@ -2,11 +2,13 @@ package com.example.sl3verbeterd
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sl3verbeterd.ui.applicant.ApplicantsActivity
 import com.example.sl3verbeterd.ui.auth.LandingActivity
+import com.example.sl3verbeterd.ui.profile.ProfileActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,9 +56,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         navProfileButton.setOnClickListener {
+            Log.d("MainActivity", "Profile Button Clicked")
             // Implement the behavior for the profile button
             handleNavigation("profile", role) // Pass the user's role
         }
+
 
         navDashboardButton.setOnClickListener {
             // Implement the behavior for the dashboard button
@@ -82,7 +86,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             "profile" -> {
-                // Implement behavior for the profile button
+                // Navigate to ProfileActivity
+                val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+                intent.putExtra("role", role) // Pass the user's role to ProfileActivity if needed
+                startActivity(intent)
             }
             "dashboard" -> {
                 // Implement behavior for the dashboard button

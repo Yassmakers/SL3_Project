@@ -16,12 +16,13 @@ import com.example.sl3verbeterd.MainActivity
 import com.example.sl3verbeterd.R
 import com.example.sl3verbeterd.ui.applicant.ApplicantsActivity
 import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModelFactory
+import com.example.sl3verbeterd.ui.profile.ProfileActivity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 
 class LoginActivity : AppCompatActivity() {
 
-    private val applicationScope = CoroutineScope(SupervisorJob() + IO)
+    private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private lateinit var hireHubDao: HireHubDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,17 +48,10 @@ class LoginActivity : AppCompatActivity() {
                     if (accountState.isAuthenticated) {
                         showLoginSuccessDialog()
 
-                        val intent: Intent = if (accountState.role == "admin") {
-                            Log.d("LoginActivity", "User Role before Intent: ${accountState.role}")
-                            Intent(this@LoginActivity, ApplicantsActivity::class.java).apply {
-                                putExtra("role", accountState.role) // Pass the user's role to ApplicantsActivity
-                            }
-                        } else {
-                            Log.d("LoginActivity", "User Role: ${accountState.role}")
-                            Intent(this@LoginActivity, MainActivity::class.java)
-                        }
-                        startActivity(intent)
-                        finish() // Finish LoginActivity to prevent going back on successful login
+                        val user = hireHubDao.getUserByUsername(username)
+                        val userProfile = hireHubDao.getProfileById(user.id) // Fetch user's profile from the database
+
+                        startNextActivity(accountState, userProfile)
                     } else {
                         showLoginFailureDialog()
                     }
@@ -88,6 +82,18 @@ class LoginActivity : AppCompatActivity() {
                 AccountState(false, "guest") // Default role for unauthenticated users
             }
         }
+    }
+
+    private fun startNextActivity(accountState: AccountState, userProfile: UserProfile?) {
+        val intent = Intent(this@LoginActivity, ProfileActivity::class.java)
+        userProfile?.let {
+            intent.putExtra("firstName", it.firstName)
+            intent.putExtra("lastName", it.lastName)
+            intent.putExtra("location", it.location)
+            intent.putExtra("job", it.job)
+        }
+        startActivity(intent)
+        finish() // Finish LoginActivity to prevent going back on successful login
     }
 
     private fun showLoginSuccessDialog() {

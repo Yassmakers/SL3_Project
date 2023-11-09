@@ -1,8 +1,10 @@
 package com.example.sl3verbeterd
 
-import androidx.annotation.WorkerThread
+
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
+import com.example.sl3verbeterd.model.ProfileAndAccount
+
 
 class HireHubRepository(private val hireHubDao: HireHubDao) {
 
@@ -14,6 +16,11 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
     suspend fun insertProfile(profile: Profile) {
         hireHubDao.insertProfile(profile)
     }
+
+    fun getProfileAndAccountById(id: Int): LiveData<ProfileAndAccount> {
+        return hireHubDao.getProfileAndAccountById(id)
+    }
+
 
     suspend fun deleteProfile(profile: Profile) {
         hireHubDao.deleteProfile(profile)

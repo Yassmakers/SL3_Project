@@ -1,9 +1,4 @@
 package com.example.sl3verbeterd.ui.applicant
-import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModelFactory
-import androidx.appcompat.app.AppCompatActivity
-import androidx.activity.viewModels
-import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModel
-
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,15 +7,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.sl3verbeterd.Account
-import com.example.sl3verbeterd.HireHubDao
 import com.example.sl3verbeterd.HireHubRepository
 import com.example.sl3verbeterd.Profile
+import com.example.sl3verbeterd.model.ProfileAndAccount
 import com.example.sl3verbeterd.ui.auth.AccountState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class ApplicantsViewModel(private val repository: HireHubRepository) : ViewModel() {
     private val _loginSuccess = MutableLiveData<Boolean>()
     val loginSuccess: LiveData<Boolean> get() = _loginSuccess
@@ -54,6 +48,11 @@ class ApplicantsViewModel(private val repository: HireHubRepository) : ViewModel
 
     }
 
+//    suspend fun getProfileById(id: Int): Profile? {
+//        return repository.getProfileById(id)
+//    }
+
+
     fun showProfile(id: Int) = viewModelScope.launch {
         repository.showProfile(id)
 
@@ -81,6 +80,10 @@ class ApplicantsViewModel(private val repository: HireHubRepository) : ViewModel
 
     suspend fun getUserByUsername(username: String) = viewModelScope.launch {
         repository.getUserByUsername(username)
+    }
+
+    fun getProfileAndAccountById(id: Int): LiveData<ProfileAndAccount> {
+        return repository.getProfileAndAccountById(id)
     }
 
 

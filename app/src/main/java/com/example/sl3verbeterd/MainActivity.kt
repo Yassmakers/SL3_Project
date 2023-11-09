@@ -26,6 +26,9 @@ class MainActivity : AppCompatActivity() {
 
         // Retrieve the user's role from the session, default to "guest" if not provided
         val role = intent.getStringExtra("role") ?: "guest"
+        val id = intent.getIntExtra("id", 0)
+
+        Log.d("MainActivity", "Received Role: $role, Received ID: $id")
 
         // Hide "Applicants" and "Dboard" buttons if the user has a "guest" role
         if (role == "guest") {
@@ -47,28 +50,28 @@ class MainActivity : AppCompatActivity() {
 
         navHomeButton.setOnClickListener {
             // Implement the behavior for the home button based on the user's role
-            handleNavigation("home", role) // Pass the user's role
+            handleNavigation("home", role, id) // Pass the user's role
         }
 
         navApplicantsButton.setOnClickListener {
             // Implement the behavior for the applicants button based on the user's role
-            handleNavigation("applicants", role) // Pass the user's role
+            handleNavigation("applicants", role, id) // Pass the user's role
         }
 
         navProfileButton.setOnClickListener {
             Log.d("MainActivity", "Profile Button Clicked")
             // Implement the behavior for the profile button
-            handleNavigation("profile", role) // Pass the user's role
+            handleNavigation("profile", role, id) // Pass the user's role
         }
 
 
         navDashboardButton.setOnClickListener {
             // Implement the behavior for the dashboard button
-            handleNavigation("dashboard", role) // Pass the user's role
+            handleNavigation("dashboard", role, id) // Pass the user's role
         }
     }
 
-    private fun handleNavigation(destination: String, role: String) {
+    private fun handleNavigation(destination: String, role: String, id: Int) {
         // Check the user's role and navigate accordingly
         when (destination) {
             "home" -> {
@@ -79,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                 if (role == "admin") {
                     val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
                     intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+                    intent.putExtra("id", id)
                     startActivityForResult(intent, newWordActivityRequestCode)
                     finish() // Finish MainActivity to prevent going back when navigating to ApplicantsActivity
                 } else {
@@ -89,6 +93,7 @@ class MainActivity : AppCompatActivity() {
                 // Navigate to ProfileActivity
                 val intent = Intent(this@MainActivity, ProfileActivity::class.java)
                 intent.putExtra("role", role) // Pass the user's role to ProfileActivity if needed
+                intent.putExtra("id", id)
                 startActivity(intent)
             }
             "dashboard" -> {

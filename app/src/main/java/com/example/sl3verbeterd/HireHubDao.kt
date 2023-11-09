@@ -9,6 +9,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.sl3verbeterd.model.ProfileAndAccount
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -65,8 +66,9 @@ interface HireHubDao {
 //    fun getAccountsOrderedByFirstName(): Flow<List<Profile>>
 
 
-
-
+    @Transaction
+    @Query("SELECT * FROM profile INNER JOIN account ON profile.id = account.id WHERE profile.id = :id")
+    fun getProfileAndAccountById(id: Int): LiveData<ProfileAndAccount>
 
     // Combination of Insert and Update
     @Upsert

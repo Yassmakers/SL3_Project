@@ -1,5 +1,6 @@
 package com.example.sl3verbeterd.ui.auth
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -41,6 +42,8 @@ class LoginActivity : AppCompatActivity() {
             val password = editTextLoginPassword.text.toString()
 
             applicationScope.launch {
+                // Await++
+                waitForDatabaseInitialization()
                 val accountState = authenticateUserLocally(username, password)
 
                 withContext(Dispatchers.Main) {
@@ -48,16 +51,17 @@ class LoginActivity : AppCompatActivity() {
                         showLoginSuccessDialog()
 
                         val intent: Intent = if (accountState.role == "admin") {
-                            Log.d("LoginActivity", "User Role before Intent: ${accountState.role}")
+
                             Intent(this@LoginActivity, ApplicantsActivity::class.java).apply {
                                 putExtra("role", accountState.role) // Pass the user's role to ApplicantsActivity
+                                putExtra("id", accountState.id)
                             }
                         } else {
-                            Log.d("LoginActivity", "User Role: ${accountState.role}")
+
                             Intent(this@LoginActivity, MainActivity::class.java)
                         }
                         startActivity(intent)
-                        finish() // Finish LoginActivity to prevent going back on successful login
+                        finish()
                     } else {
                         showLoginFailureDialog()
                     }
@@ -82,10 +86,15 @@ class LoginActivity : AppCompatActivity() {
     private suspend fun authenticateUserLocally(username: String, password: String): AccountState {
         return withContext(IO) {
             val user = hireHubDao.getUserByUsername(username)
+
+
+
             if (user != null && user.password == password) {
-                AccountState(true, user.role)
+
+                AccountState(true, user.role, user.id)
             } else {
-                AccountState(false, "guest") // Default role for unauthenticated users
+
+                AccountState(false, "guest", 0) // Default role for unauthenticated users
             }
         }
     }
@@ -105,10 +114,16 @@ class LoginActivity : AppCompatActivity() {
             .create()
 
         dialog.show()
+    }
 
-        val handler = Handler()
-        handler.postDelayed({
-            dialog.dismiss()
-        }, 3000) // 3000 milliseconds (3 seconds) delay before dismissing the dialog
+    private suspend fun waitForDatabaseInitialization() {
+        // Check if the database is already initialized
+        val prefs = getPreferences(Context.MODE_PRIVATE)
+        val databaseInitialized = prefs.getBoolean("DATABASE_INITIALIZED", false)
+
+        if (!databaseInitialized) {
+            // If not initialized, wait for a short duration (adjust as needed)
+            delay(500)
+        }
     }
 }

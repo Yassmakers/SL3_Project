@@ -69,13 +69,15 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         }
 
         // Retrieve user's role from the intent extras
-        role = intent.getStringExtra("role") ?: "guest"
-        Log.d("ApplicantsActivity", "User Role in ApplicantsActivity: $role")
+        val role = intent.getStringExtra("role") ?: "guest"
+        val id = intent.getIntExtra("id", 0)
+        Log.d("ApplicantsActivity", "Received Role: $role, Received ID: $id")
 
         val navHome = findViewById<Button>(R.id.nav_home_button)
         navHome.setOnClickListener {
             val intent = Intent(this@ApplicantsActivity, MainActivity::class.java)
             intent.putExtra("role", role) // Pass the user's role to MainActivity
+            intent.putExtra("id", id)
             startActivityForResult(intent, newWordActivityRequestCode)
         }
 

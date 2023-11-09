@@ -88,7 +88,7 @@ abstract class HireHubDatabase: RoomDatabase() {
 
             // Recruiter
 
-            account = Account("DeRecruiter", "Recruiter123", "recruiter")
+            account = Account("DeRecruiter", "DeRecruiter123", "recruiter")
             hireHubDao.insertAccount(account)
             profile = Profile("Polina", "Kozlova", "Almere", "Docent ICT")
             hireHubDao.insertProfile(profile)

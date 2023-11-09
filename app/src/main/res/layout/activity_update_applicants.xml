@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/min_height"
         android:fontFamily="sans-serif-light"
-        android:hint="@{oldFirstName}"
+        android:hint="First Name"
         android:inputType="textAutoComplete"
         android:layout_margin="@dimen/big_padding"
         android:textSize="18sp" />
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/min_height"
         android:fontFamily="sans-serif-light"
-        android:hint="@{oldLastName}"
+        android:hint="Last Name"
         android:inputType="textAutoComplete"
         android:layout_margin="@dimen/big_padding"
         android:textSize="18sp" />
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/min_height"
         android:fontFamily="sans-serif-light"
-        android:hint="@{oldLocation}"
+        android:hint="Location"
         android:inputType="textAutoComplete"
         android:layout_margin="@dimen/big_padding"
         android:textSize="18sp" />
@@ -48,6 +48,27 @@
         android:layout_margin="@dimen/big_padding"
         android:textSize="18sp" />
 
+    <EditText
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/min_height"
+        android:fontFamily="sans-serif-light"
+        android:hint="Username"
+        android:inputType="textAutoComplete"
+        android:layout_margin="@dimen/big_padding"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/min_height"
+        android:fontFamily="sans-serif-light"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_margin="@dimen/big_padding"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/button_save"

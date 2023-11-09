@@ -32,8 +32,6 @@ class UpdateApplicantsActivity : AppCompatActivity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         setContentView(R.layout.activity_update_applicants)
 
 
@@ -41,9 +39,9 @@ class UpdateApplicantsActivity : AppCompatActivity() {
         val id = intent.getStringExtra("id")!!.toInt()
 
 
-        // Account
-//        val addUserName = findViewById<EditText>(R.id.user_name)
-//        val addPassWord = findViewById<EditText>(R.id.password)
+//         Account
+        val addUserName = findViewById<EditText>(R.id.user_name)
+        val addPassWord = findViewById<EditText>(R.id.password)
 
         // Profile
         val addFirstName = findViewById<EditText>(R.id.first_name)
@@ -75,6 +73,7 @@ class UpdateApplicantsActivity : AppCompatActivity() {
 
 
 
+
         val button = findViewById<Button>(R.id.button_save)
 
         button.setOnClickListener {
@@ -85,18 +84,31 @@ class UpdateApplicantsActivity : AppCompatActivity() {
             val job = addJob.text.toString()
 
             // Account
-//            val userName = addUserName.text.toString()
-//            val passWord = addPassWord.text.toString()
-//            val role = "user"
+            val userName = addUserName.text.toString()
+            val passWord = addPassWord.text.toString()
 
+            if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(passWord)) {
+                // Display an error message if username or password is empty
+                Toast.makeText(this, "Username and Password are required", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
                 val profile = Profile(firstName = firstName, lastName = lastName, location = location, job = job, id = id)
+                val account = Account(username = userName, password = passWord, role = "user", id = id)
+
+                // Update profile and account details
                 applicantsViewModel.updateProfile(profile)
-//                val account = Account(username = userName, password = passWord, role = role, id = id)
-//                applicantsViewModel.updateAccount(account)
-                val intent = Intent(this@UpdateApplicantsActivity, ApplicantsActivity::class.java)
-                startActivity(intent)
+                applicantsViewModel.updateAccount(account)
+
+                // Display success message
+                Toast.makeText(this, "Profile and Account details updated successfully", Toast.LENGTH_SHORT).show()
+
+                // Close the current activity
+                finish()
+            } else {
+                // Display an error message if first name or last name is empty
+                Toast.makeText(this, "First Name and Last Name are required", Toast.LENGTH_SHORT).show()
             }
         }
     }

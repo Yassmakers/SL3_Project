@@ -2,10 +2,11 @@ package com.example.sl3verbeterd
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sl3verbeterd.ui.applicant.ApplicantsActivity
+import com.example.sl3verbeterd.ui.auth.LandingActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,30 +16,50 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Retrieve the user's role from the session
+        val navHomeButton = findViewById<Button>(R.id.nav_home_button)
+        val navApplicantsButton = findViewById<Button>(R.id.nav_applicants_button)
+        val navProfileButton = findViewById<Button>(R.id.nav_profile_button)
+        val navDashboardButton = findViewById<Button>(R.id.nav_dashboard_button)
+        val navLogoutButton = findViewById<Button>(R.id.nav_logout_button)
+
+        // Retrieve the user's role from the session, default to "guest" if not provided
         val role = intent.getStringExtra("role") ?: "guest"
-        Log.d("MainActivity", "User Role in MainActivity: $role")
-        val navHome = findViewById<Button>(R.id.nav_home_button)
-        navHome.setOnClickListener {
+
+        // Hide "Applicants" and "Dboard" buttons if the user has a "guest" role
+        if (role == "guest") {
+            navApplicantsButton.visibility = View.GONE
+            navDashboardButton.visibility = View.GONE
+        } else {
+            // Show logout button only for logged-in users
+            navLogoutButton.visibility = View.VISIBLE
+            navLogoutButton.setOnClickListener {
+                // Implement logout functionality here (e.g., clear user session, log out the user)
+
+                // Redirect the user to the landing activity
+                val intent = Intent(this@MainActivity, LandingActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish() // Finish MainActivity to prevent going back to it
+            }
+        }
+
+        navHomeButton.setOnClickListener {
             // Implement the behavior for the home button based on the user's role
             handleNavigation("home", role) // Pass the user's role
         }
 
-        val navApplicants = findViewById<Button>(R.id.nav_applicants_button)
-        navApplicants.setOnClickListener {
+        navApplicantsButton.setOnClickListener {
             // Implement the behavior for the applicants button based on the user's role
             handleNavigation("applicants", role) // Pass the user's role
         }
 
-        val navProfile = findViewById<Button>(R.id.nav_profile_button)
-        navProfile.setOnClickListener {
-            // Implement the behavior for the profile button based on the user's role
+        navProfileButton.setOnClickListener {
+            // Implement the behavior for the profile button
             handleNavigation("profile", role) // Pass the user's role
         }
 
-        val navDashboard = findViewById<Button>(R.id.nav_dashboard_button)
-        navDashboard.setOnClickListener {
-            // Implement the behavior for the dashboard button based on the user's role
+        navDashboardButton.setOnClickListener {
+            // Implement the behavior for the dashboard button
             handleNavigation("dashboard", role) // Pass the user's role
         }
     }

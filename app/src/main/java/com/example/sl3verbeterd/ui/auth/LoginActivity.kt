@@ -29,7 +29,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         hireHubDao = HireHubDatabase.getDatabase(this, applicationScope).hireHubDao()
-
+// Initialize the database here if needed
+        HireHubDatabase.getDatabase(this, applicationScope)
         val loginButton = findViewById<Button>(R.id.login_button)
         val editTextLoginUser = findViewById<EditText>(R.id.editTextLoginUser)
         val editTextLoginPassword = findViewById<EditText>(R.id.editTextLoginPassword)

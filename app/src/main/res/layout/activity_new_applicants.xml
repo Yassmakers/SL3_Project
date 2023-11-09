@@ -71,6 +71,19 @@
         android:layout_margin="@dimen/big_padding"
         android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/roles_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize = "20dp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/roles_view"/>
+
     <Button
         android:id="@+id/button_save"
         android:layout_width="match_parent"

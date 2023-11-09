@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_red_dark"
-            android:textColor="@drawable/bottom_nav_button_selector"
+
             android:backgroundTint="@android:color/holo_red_dark"
             android:text="Login"
             android:layout_marginTop="@dimen/big_padding" />
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#D3D3D3"
-            android:textColor="#FF000000"
+
             android:text="Register"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#D3D3D3"
-            android:textColor="#FF000000"
+
             android:text="Continue as Guest"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"

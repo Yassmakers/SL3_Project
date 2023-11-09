@@ -8,32 +8,31 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="48dp"
         >
 
-    <Button
-        android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_red_dark"
-        android:textColor="@drawable/bottom_nav_button_selector"
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:text="Maak een account"
-        />
-    <Button
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_red_dark"
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:text="Login"
-        />
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_dark"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="Maak een account"
+            />
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_dark"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="Login"
+            />
         <Button
             android:id="@+id/guest"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@android:color/holo_red_dark"
             android:backgroundTint="@android:color/holo_red_dark"
             android:text="Ga verder als gast"

@@ -27,6 +27,7 @@
         android:layout_marginEnd="104dp"
         android:text="Logout"
         android:visibility="invisible"
+        android:background="#FF0000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/buttonRow"
         tools:visibility="visible" />
@@ -39,6 +40,7 @@
         android:layout_marginEnd="104dp"
         android:text="Registreer"
         android:visibility="gone"
+        android:background="#FF0000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/buttonRow"
         tools:visibility="visible" />

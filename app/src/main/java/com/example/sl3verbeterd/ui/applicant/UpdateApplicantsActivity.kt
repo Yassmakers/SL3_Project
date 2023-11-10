@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.example.sl3verbeterd.R
 
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.viewModels
 
@@ -59,6 +62,32 @@ class UpdateApplicantsActivity : AppCompatActivity() {
             addPassWord.setText(oldPassWord)
         }
 
+        // access the items of the list
+        val roles = resources.getStringArray(R.array.roles)
+
+        // access the spinner
+        val spinner = findViewById<Spinner>(R.id.spinner)
+        spinner.visibility = if (role == "admin") View.VISIBLE else View.INVISIBLE
+        if (spinner != null) {
+            val adapter = ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, roles)
+            spinner.adapter = adapter
+
+            spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>,
+                                            view: View, position: Int, id: Long) {
+
+
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+            }
+        }
+
         val oldFirstName = intent.getStringExtra("oldFirstName").toString()
         findViewById<EditText>(R.id.first_name).apply{
             hint = oldFirstName
@@ -105,15 +134,24 @@ class UpdateApplicantsActivity : AppCompatActivity() {
             val location = addLocation.text.toString()
             val job = addJob.text.toString()
             val education = addEducation.text.toString()
+            val rolePick = spinner.selectedItem.toString()
 
 
 
 
 
-            if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
+
+            val account: Account
+
+            if (firstName.isNotEmpty() && lastName.isNotEmpty() && location.isNotEmpty()&& job.isNotEmpty()&& education.isNotEmpty()) {
 
 
-                val account = Account(username = userName, password = passWord, role = oldRole ?: "", id = id)
+                account = if (role == "admin"){
+                    Account(username = userName, password = passWord, role = rolePick, id = id)
+                } else {
+                    Account(username = userName, password = passWord, role = oldRole ?: "", id = id)
+                }
+
                 val profile = Profile(firstName = firstName, lastName = lastName, location = location, job = job, education = education, id = id, visibility = visibility)
 
 
@@ -133,7 +171,7 @@ class UpdateApplicantsActivity : AppCompatActivity() {
                 finish()
             } else {
                 // Display an error message if first name or last name is empty
-                Toast.makeText(this, "First Name and Last Name are required", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
     }

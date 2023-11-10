@@ -82,7 +82,12 @@ class NewApplicantsActivity : AppCompatActivity()  {
                 applicantsViewModel.insertProfile(profile)
                 val account = Account(username = userName, password = passWord, role = role)
                 applicantsViewModel.insertAccount(account)
+
+                val role = intent.getStringExtra("role") ?: "guest"
+                val id = intent.getIntExtra("id", 0)
                 val intent = Intent(this@NewApplicantsActivity, ApplicantsActivity::class.java)
+                intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+                intent.putExtra("id", id)
                 startActivity(intent)
             }
         }

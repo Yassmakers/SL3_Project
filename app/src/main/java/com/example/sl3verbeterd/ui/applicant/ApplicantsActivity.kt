@@ -52,6 +52,8 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         fab.setOnClickListener {
             if (role == "admin"){
             val intent = Intent(this@ApplicantsActivity, NewApplicantsActivity::class.java)
+                intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+                intent.putExtra("id", id)
             startActivity(intent)
             } else {
                 val intent = Intent(this@ApplicantsActivity, RegisterActivity::class.java)
@@ -128,6 +130,8 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         val id = intent.getIntExtra("id", 0)
         if (role == "admin"){
             val intent = Intent(this@ApplicantsActivity, NewApplicantsActivity::class.java)
+            intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+            intent.putExtra("id", id)
             startActivity(intent)
         } else {
             val intent = Intent(this@ApplicantsActivity, RegisterActivity::class.java)

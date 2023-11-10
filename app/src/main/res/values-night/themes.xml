@@ -13,4 +13,10 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="RedButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">#FF0000</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <!-- Other button styling attributes if needed -->
+    </style>
 </resources>

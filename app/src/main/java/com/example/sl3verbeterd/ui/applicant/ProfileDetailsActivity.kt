@@ -62,7 +62,7 @@ class ProfileDetailsActivity : AppCompatActivity() {
                 // Populate TextViews with profile details
                name.text = "${profile.firstName} ${profile.lastName}"
                 job.text = "Functie: ${profile.job}"
-                location.text = "Functie: ${profile.location}"
+                location.text = "Locatie: ${profile.location}"
                 education.text = "Opleidingsniveau: ${profile.education}"
 
                 if (role == "admin"){

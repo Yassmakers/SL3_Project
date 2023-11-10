@@ -42,6 +42,11 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        // Retrieve the user's role from the session, default to "guest" if not provided
+        val role = intent.getStringExtra("role") ?: "guest"
+        val username = intent.getStringExtra("username") ?: "Gast"
+        val id = intent.getIntExtra("id", 0)
+
         val navHomeButton = findViewById<Button>(R.id.nav_home_button)
         val navApplicantsButton = findViewById<Button>(R.id.nav_applicants_button)
         val navProfileButton = findViewById<Button>(R.id.nav_profile_button)
@@ -49,35 +54,40 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
         val navRegisterButton = findViewById<Button>(R.id.nav_register_button)
 
 
-
-        // Retrieve the user's role from the session, default to "guest" if not provided
-        val role = intent.getStringExtra("role") ?: "guest"
-        val username = intent.getStringExtra("username") ?: "Gast"
-        val id = intent.getIntExtra("id", 0)
-
         Log.d("MainActivity", "Received Role: $role, Received ID: $id, Received Name: $username")
 
-        // Hide "Applicants" and "Dboard" buttons if the user has a "guest" role
+        // Navigation bar logic per role
         if (role == "guest") {
             navProfileButton.visibility = View.GONE
             navApplicantsButton.visibility = View.GONE
             navRegisterButton.visibility = View.VISIBLE
-            navRegisterButton.setOnClickListener {
-                // Implement logout functionality here (e.g., clear user session, log out the user)
 
-                // Redirect the user to the landing activity
+            navRegisterButton.setOnClickListener {
                 val intent = Intent(this@MainActivity, RegisterActivity::class.java)
                 startActivity(intent)
                 finish()
             }
-        } else {
+        }
+
+        else if (role == "user"){
+            navApplicantsButton.visibility = View.GONE
+            navLogoutButton.visibility = View.VISIBLE
+
+            navLogoutButton.setOnClickListener {
+                val intent = Intent(this@MainActivity, LandingActivity::class.java)
+                intent.flags =
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
+            }
+        }
+
+        else {
             // Show logout button only for logged-in users
             navRegisterButton.visibility = View.GONE
             navLogoutButton.visibility = View.VISIBLE
-            navLogoutButton.setOnClickListener {
-                // Implement logout functionality here (e.g., clear user session, log out the user)
 
-                // Redirect the user to the landing activity
+            navLogoutButton.setOnClickListener {
                 val intent = Intent(this@MainActivity, LandingActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
@@ -113,42 +123,6 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
 
     }
 
-    private fun handleNavigation(destination: String, role: String, id: Int) {
-        // Check the user's role and navigate accordingly
-        when (destination) {
-            "home" -> {
-                // Implement behavior for the home button
-            }
-            "applicants" -> {
-                // If the user is an admin, navigate to ApplicantsActivity
-                if (role == "guest") {
-                    val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-
-                else {
-
-                    val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
-                    intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
-                    intent.putExtra("id", id)
-                    startActivity(intent)
-                    finish() // Finish MainActivity to prevent going back when navigating to ApplicantsActivity
-                }
-            }
-            "profile" -> {
-                // Navigate to ProfileActivity
-                val intent = Intent(this@MainActivity, ProfileActivity::class.java)
-                intent.putExtra("role", role) // Pass the user's role to ProfileActivity if needed
-                intent.putExtra("id", id)
-                startActivity(intent)
-                finish()
-            }
-            "dashboard" -> {
-                // Implement behavior for the dashboard button
-            }
-        }
-    }
 
     override fun onProfileClick(profile: Profile) {
         // Handle profile click
@@ -241,5 +215,44 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
 
     companion object {
         const val EXTRA_REPLY = "com.example.sl3verbeterd.REPLY"
+    }
+
+
+    private fun handleNavigation(destination: String, role: String, id: Int) {
+        // Check the user's role and navigate accordingly
+        when (destination) {
+            "home" -> {
+                val intent = Intent(this@MainActivity, MainActivity::class.java)
+                intent.putExtra("role", role) // Pass the user's role to ProfileActivity if needed
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }
+            "applicants" -> {
+
+                if (role == "guest") {
+                    val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
+                else {
+
+                    val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
+                    intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+                    intent.putExtra("id", id)
+                    startActivity(intent)
+                    finish() // Finish MainActivity to prevent going back when navigating to ApplicantsActivity
+                }
+            }
+            "profile" -> {
+                // Navigate to ProfileActivity
+                val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+                intent.putExtra("role", role) // Pass the user's role to ProfileActivity if needed
+                intent.putExtra("id", id)
+                startActivity(intent)
+
+            }
+
+        }
     }
 }

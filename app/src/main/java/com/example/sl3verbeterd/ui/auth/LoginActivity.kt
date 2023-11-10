@@ -52,7 +52,6 @@ class LoginActivity : AppCompatActivity() {
 
                         val intent: Intent = if (accountState.role == "guest") {
                             Intent(this@LoginActivity, MainActivity::class.java)
-
                         } else {
 
                         Intent(this@LoginActivity, MainActivity::class.java).apply {
@@ -61,8 +60,6 @@ class LoginActivity : AppCompatActivity() {
                             putExtra("username", username)
                         }
                         }
-
-
 
                         startActivity(intent)
                         finish()
@@ -128,7 +125,7 @@ class LoginActivity : AppCompatActivity() {
 
         if (!databaseInitialized) {
             // If not initialized, wait for a short duration (adjust as needed)
-            delay(500)
+            delay(50)
         }
     }
 }

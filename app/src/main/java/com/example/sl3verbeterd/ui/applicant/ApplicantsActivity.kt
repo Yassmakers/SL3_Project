@@ -13,13 +13,16 @@ import com.example.sl3verbeterd.ProfileListAdapter
 
 import android.app.Activity
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 
 import androidx.lifecycle.observe
 import com.example.sl3verbeterd.MainActivity
+import com.example.sl3verbeterd.ui.auth.LandingActivity
 import com.example.sl3verbeterd.ui.auth.RegisterActivity
+import com.example.sl3verbeterd.ui.profile.ProfileActivity
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -58,28 +61,30 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
             }
         }
 
-   
+        val navHomeButton = findViewById<Button>(R.id.nav_home_button)
+        val navApplicantsButton = findViewById<Button>(R.id.nav_applicants_button)
+        val navProfileButton = findViewById<Button>(R.id.nav_profile_button)
+
+        // Retrieve the user's role from the session, default to "guest" if not provided
 
 
-        Log.d("ApplicantsActivity", "Received Role: $role, Received ID: $id")
 
-        val navHome = findViewById<Button>(R.id.nav_home_button)
-        navHome.setOnClickListener {
-            val intent = Intent(this@ApplicantsActivity, MainActivity::class.java)
-            intent.putExtra("role", role) // Pass the user's role to MainActivity
-            intent.putExtra("id", id)
-            startActivity(intent)
+
+        navHomeButton.setOnClickListener {
+            // Implement the behavior for the home button based on the user's role
+            handleNavigation("home", role, id) // Pass the user's role
         }
 
-        val navApplicants = findViewById<Button>(R.id.nav_applicants_button)
-        navApplicants.setOnClickListener {
+        navApplicantsButton.setOnClickListener {
             // Implement the behavior for the applicants button based on the user's role
-            // Use the 'role' variable here to check user's role
+            handleNavigation("applicants", role, id) // Pass the user's role
         }
 
-        // Add an observer on the LiveData returned by getAlphabetizedWords.
-        // The onChanged() method fires when the observed data changes and the activity is
-        // in the foreground.
+        navProfileButton.setOnClickListener {
+            Log.d("MainActivity", "Profile Button Clicked")
+            // Implement the behavior for the profile button
+            handleNavigation("profile", role, id) // Pass the user's role
+        }
 
         if (role == "guest"){
             applicantsViewModel.allVisibleProfiles.observe(owner = this) { profiles ->
@@ -197,5 +202,43 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
 
     companion object {
         const val EXTRA_REPLY = "com.example.sl3verbeterd.REPLY"
+    }
+
+    private fun handleNavigation(destination: String, role: String, id: Int) {
+        // Check the user's role and navigate accordingly
+        when (destination) {
+            "home" -> {
+                val intent = Intent(this@ApplicantsActivity, MainActivity::class.java)
+                intent.putExtra("role", role) // Pass the user's role to ProfileActivity if needed
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }
+            "applicants" -> {
+
+                if (role == "guest") {
+                    val intent = Intent(this@ApplicantsActivity, ApplicantsActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
+                else {
+
+                    val intent = Intent(this@ApplicantsActivity, ApplicantsActivity::class.java)
+                    intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+                    intent.putExtra("id", id)
+                    startActivity(intent)
+                    finish() // Finish MainActivity to prevent going back when navigating to ApplicantsActivity
+                }
+            }
+            "profile" -> {
+                // Navigate to ProfileActivity
+                val intent = Intent(this@ApplicantsActivity, ProfileActivity::class.java)
+                intent.putExtra("role", role) // Pass the user's role to ProfileActivity if needed
+                intent.putExtra("id", id)
+                startActivity(intent)
+
+            }
+
+        }
     }
 }

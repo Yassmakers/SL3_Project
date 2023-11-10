@@ -10,7 +10,7 @@
         android:id="@+id/recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/nav_row"
+        app:layout_constraintBottom_toTopOf="@id/buttonRow"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -19,47 +19,50 @@
         tools:listitem="@layout/recyclerview_admin" />
 
     <LinearLayout
-        android:id="@+id/nav_row"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/buttonRow"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <Button
             android:id="@+id/nav_home_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:background="@android:color/holo_red_dark"
-            android:backgroundTint="@android:color/holo_red_dark"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:text="Home"
-            />
-        <Button
-            android:id="@+id/nav_applicants_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_red_dark"
-            android:textColor="@drawable/bottom_nav_button_selector"
-            android:backgroundTint="@android:color/holo_red_dark"
-            android:text="Applicants"
+            android:textColor="#FFFFFF"
             />
 
         <Button
             android:id="@+id/nav_profile_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:background="@android:color/holo_red_dark"
-            android:backgroundTint="@android:color/holo_red_dark"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:text="Profile"
+            android:textColor="#FFFFFF"
             />
 
         <Button
-            android:id="@+id/nav_dashboard_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/nav_applicants_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:background="@android:color/holo_red_dark"
-            android:backgroundTint="@android:color/holo_red_dark"
-            android:text="Dboard"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="Dashboard"
+            android:textColor="#FFFFFF"
             />
 
     </LinearLayout>
@@ -69,7 +72,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/recyclerview"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

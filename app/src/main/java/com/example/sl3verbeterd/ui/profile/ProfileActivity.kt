@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import com.example.sl3verbeterd.HireHubApplication
+import com.example.sl3verbeterd.MainActivity
 import com.example.sl3verbeterd.Profile
 import com.example.sl3verbeterd.ProfileListAdapter
 import com.example.sl3verbeterd.ui.applicant.ApplicantsActivity
@@ -20,6 +21,7 @@ import com.example.sl3verbeterd.ui.applicant.NewApplicantsActivity
 import com.example.sl3verbeterd.ui.applicant.ProfileDetailsActivity
 import com.example.sl3verbeterd.ui.applicant.UpdateApplicantsActivity
 import com.example.sl3verbeterd.ui.auth.LandingActivity
+import com.example.sl3verbeterd.ui.auth.RegisterActivity
 
 class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListener{
 
@@ -125,14 +127,22 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
         val navHomeButton = findViewById<Button>(R.id.nav_home_button)
         val navApplicantsButton = findViewById<Button>(R.id.nav_applicants_button)
         val navProfileButton = findViewById<Button>(R.id.nav_profile_button)
-        val navDashboardButton = findViewById<Button>(R.id.nav_dashboard_button)
 
 
 
-        // Hide "Applicants" and "Dboard" buttons if the user has a "guest" role
+
+        // Navigation bar logic per role
         if (role == "guest") {
-            navApplicantsButton.visibility = android.view.View.GONE
-            navDashboardButton.visibility = android.view.View.GONE
+            navProfileButton.visibility = View.GONE
+            navApplicantsButton.visibility = View.GONE
+        }
+
+        else if (role == "user"){
+            navApplicantsButton.visibility = View.GONE
+        }
+
+        else {
+//
         }
 
         navHomeButton.setOnClickListener {
@@ -151,10 +161,7 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
             handleNavigation("profile", role, id) // Pass the user's role
         }
 
-        navDashboardButton.setOnClickListener {
-            // Implement behavior for the dashboard button
-            handleNavigation("dashboard", role, id) // Pass the user's role
-        }
+
     }
 
     override fun onProfileClick(profile: Profile) {
@@ -235,19 +242,27 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
         // Check the user's role and navigate accordingly
         when (destination) {
             "home" -> {
-                // Implement behavior for the home button
+                val intent = Intent(this@ProfileActivity, MainActivity::class.java)
+                intent.putExtra("role", role) // Pass the user's role to ProfileActivity if needed
+                intent.putExtra("id", id)
+                startActivity(intent)
             }
 
             "applicants" -> {
-                // If the user is an admin, navigate to ApplicantsActivity
-                if (role == "admin") {
+
+                if (role == "guest") {
+                    val intent = Intent(this@ProfileActivity, ApplicantsActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
+                else {
+
                     val intent = Intent(this@ProfileActivity, ApplicantsActivity::class.java)
                     intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
                     intent.putExtra("id", id)
                     startActivity(intent)
                     finish() // Finish MainActivity to prevent going back when navigating to ApplicantsActivity
-                } else {
-                    // Handle the case where the user is not authorized to access ApplicantsActivity
                 }
             }
 
@@ -259,9 +274,6 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
                 startActivity(intent)
             }
 
-            "dashboard" -> {
-                // Implement behavior for the dashboard button
-            }
         }
     }
 }

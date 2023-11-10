@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.sl3verbeterd.ui.applicant.ApplicantsFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,8 +20,7 @@ abstract class HireHubDatabase: RoomDatabase() {
     abstract fun hireHubDao(): HireHubDao
 
     companion object {
-        //        Volatile indicates that whenever there takes place any changes to this INSTANCE object immediately
-//        it indicates to this all the threads using this instance ;)
+
         @Volatile
         private var INSTANCE: HireHubDatabase? = null
 
@@ -30,21 +28,19 @@ abstract class HireHubDatabase: RoomDatabase() {
             context: Context,
             scope: CoroutineScope
         ): HireHubDatabase {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
+
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     HireHubDatabase::class.java,
                     "HireHubDatabase"
                 )
-                    // Wipes and rebuilds instead of migrating if no Migration object.
-                    // Migration is not part of this codelab.
+
                     .fallbackToDestructiveMigration()
                     .addCallback(HireHubDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
-                // return instance
+
                 instance
             }
         }
@@ -53,13 +49,10 @@ abstract class HireHubDatabase: RoomDatabase() {
         private class HireHubDatabaseCallback(
             private val scope: CoroutineScope
         ) : RoomDatabase.Callback() {
-            /**
-             * Override the onCreate method to populate the database.
-             */
+
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
-                // If you want to keep the data through app restarts,
-                // comment out the following line.
+
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
                         populateDatabase(database.hireHubDao())
@@ -69,10 +62,7 @@ abstract class HireHubDatabase: RoomDatabase() {
         }
 
 
-        /**
-         * Populate the database in a new coroutine.
-         * If you want to start with more words, just add them.
-         */
+
         suspend fun populateDatabase(hireHubDao: HireHubDao) {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
@@ -83,21 +73,21 @@ abstract class HireHubDatabase: RoomDatabase() {
 
                 var account = Account("DeAdmin", "DeAdmin123", "admin")
                 hireHubDao.insertAccount(account)
-                var profile = Profile("René", "Prinz", "Almere", "Docent ICT")
+                var profile = Profile("René", "Prinz", "Almere", "Docent ICT", "HBO", true)
                 hireHubDao.insertProfile(profile)
 
             // Recruiter
 
             account = Account("DeRecruiter", "DeRecruiter123", "recruiter")
             hireHubDao.insertAccount(account)
-            profile = Profile("Polina", "Kozlova", "Almere", "Docent ICT")
+            profile = Profile("Polina", "Kozlova", "Almere", "Docent ICT", "HBO", true)
             hireHubDao.insertProfile(profile)
 
             // User
                 // User 1
             account = Account("Gebruiker1", "Gebruiker1123", "user")
             hireHubDao.insertAccount(account)
-            profile = Profile("Jeffrey", "Tang", "Almere", "Software Developer")
+            profile = Profile("Jeffrey", "Tang", "Almere", "Software Developer", "MBO", true)
             hireHubDao.insertProfile(profile)
 
 

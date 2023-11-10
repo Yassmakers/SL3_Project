@@ -9,16 +9,20 @@ import com.example.sl3verbeterd.R
 
 class ProfileDetailsActivity : AppCompatActivity() {
 
-    private lateinit var textViewFirstName: TextView
-    private lateinit var textViewLastName: TextView
-
+    private lateinit var name: TextView
+    private lateinit var job: TextView
+    private lateinit var location: TextView
+    private lateinit var education: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_details)
 
         // Initialize TextViews
-        textViewFirstName = findViewById(R.id.textViewFirstName)
-        textViewLastName = findViewById(R.id.textViewLastName)
+        name = findViewById(R.id.name)
+        job = findViewById(R.id.job)
+        location = findViewById(R.id.location)
+        education = findViewById(R.id.education)
+
 
         // Retrieve profile ID from intent
         val profileId = intent.getIntExtra("profileId", -1)
@@ -32,8 +36,10 @@ class ProfileDetailsActivity : AppCompatActivity() {
             // Observe the LiveData and update TextViews when data changes
             profileLiveData.observe(this) { profile ->
                 // Populate TextViews with profile details
-                textViewFirstName.text = "First Name: ${profile.firstName}"
-                textViewLastName.text = "Last Name: ${profile.lastName}"
+               name.text = "${profile.firstName} ${profile.lastName}"
+                job.text = "Functie: ${profile.job}"
+                location.text = "Functie: ${profile.location}"
+                education.text = "Opleidingsniveau: ${profile.education}"
                 // Add similar lines for other profile details like location, job, etc.
             }
         } else {

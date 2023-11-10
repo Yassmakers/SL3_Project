@@ -3,25 +3,15 @@ package com.example.sl3verbeterd.ui.applicant
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.sl3verbeterd.R
-import android.app.Activity
-import android.content.Intent
 
-import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
 
-import androidx.lifecycle.observe
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.sl3verbeterd.Account
 import com.example.sl3verbeterd.HireHubApplication
 import com.example.sl3verbeterd.Profile
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class UpdateApplicantsActivity : AppCompatActivity() {
 
@@ -48,6 +38,7 @@ class UpdateApplicantsActivity : AppCompatActivity() {
         val addLastName = findViewById<EditText>(R.id.last_name)
         val addLocation = findViewById<EditText>(R.id.location)
         val addJob = findViewById<EditText>(R.id.job)
+        val addEducation = findViewById<EditText>(R.id.education)
 
 
         val oldFirstName = intent.getStringExtra("oldFirstName").toString()
@@ -65,6 +56,11 @@ class UpdateApplicantsActivity : AppCompatActivity() {
             hint =  oldLocation
         }
 
+        val oldEducation = intent.getStringExtra("oldEducation").toString()
+        findViewById<EditText>(R.id.education).apply{
+            hint =  oldEducation
+        }
+
 
         val oldJob = intent.getStringExtra("oldJob").toString()
         findViewById<EditText>(R.id.job).apply{
@@ -75,6 +71,8 @@ class UpdateApplicantsActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.job).apply{
             hint = oldJob
         }
+
+        val visibility = intent.getStringExtra("visibility").toBoolean()
 
 
 
@@ -87,19 +85,16 @@ class UpdateApplicantsActivity : AppCompatActivity() {
             val lastName = addLastName.text.toString()
             val location = addLocation.text.toString()
             val job = addJob.text.toString()
+            val education = addEducation.text.toString()
 
             // Account
             val userName = addUserName.text.toString()
             val passWord = addPassWord.text.toString()
 
-            if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(passWord)) {
-                // Display an error message if username or password is empty
-                Toast.makeText(this, "Username and Password are required", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+
 
             if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
-                val profile = Profile(firstName = firstName, lastName = lastName, location = location, job = job, id = id)
+                val profile = Profile(firstName = firstName, lastName = lastName, location = location, job = job, education = education, id = id, visibility = visibility)
                 val account = Account(username = userName, password = passWord, role = oldRole, id = id)
 
                 // Update profile and account details

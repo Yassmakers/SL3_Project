@@ -9,6 +9,8 @@ data class Profile(
     val lastName: String,
     val location: String,
     val job: String,
+    val education: String,
+    val visibility: Boolean,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 

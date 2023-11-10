@@ -11,5 +11,7 @@ data class ProfileAndAccount(
     val username: String,
     val password: String,
     val role: String,
+    val education: String,
+    val visibility: Boolean,
     val id: Int
 )

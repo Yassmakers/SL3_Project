@@ -12,7 +12,7 @@ import com.example.sl3verbeterd.ui.profile.ProfileActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private val newWordActivityRequestCode = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
                     intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
                     intent.putExtra("id", id)
-                    startActivityForResult(intent, newWordActivityRequestCode)
+                    startActivity(intent)
                     finish() // Finish MainActivity to prevent going back when navigating to ApplicantsActivity
                 } else {
                     // Handle the case where the user is not authorized to access ApplicantsActivity

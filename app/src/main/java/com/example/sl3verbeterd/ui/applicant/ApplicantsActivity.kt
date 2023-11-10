@@ -4,50 +4,27 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.example.sl3verbeterd.R
-import android.app.PendingIntent
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
-import android.os.Build
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sl3verbeterd.HireHubApplication
 import com.example.sl3verbeterd.Profile
 import com.example.sl3verbeterd.ProfileListAdapter
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 import android.app.Activity
-import android.app.Application
-import android.text.TextUtils
 import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 
 import androidx.lifecycle.observe
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.example.sl3verbeterd.Account
 import com.example.sl3verbeterd.MainActivity
-import com.example.sl3verbeterd.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-/**
- * Activity for entering a word.
- */
-
 class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListener {
 
-    private val newWordActivityRequestCode = 1
+    private val newActivityRequestCode = 1
     private lateinit var role: String // Declare role variable to store user's role
 
     private val applicantsViewModel: ApplicantsViewModel by viewModels {
@@ -66,7 +43,7 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
             val intent = Intent(this@ApplicantsActivity, NewApplicantsActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode)
+            startActivity(intent)
         }
 
         // Retrieve user's role from the intent extras
@@ -79,7 +56,7 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
             val intent = Intent(this@ApplicantsActivity, MainActivity::class.java)
             intent.putExtra("role", role) // Pass the user's role to MainActivity
             intent.putExtra("id", id)
-            startActivityForResult(intent, newWordActivityRequestCode)
+            startActivity(intent)
         }
 
         val navApplicants = findViewById<Button>(R.id.nav_applicants_button)
@@ -120,7 +97,7 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
 
     override fun onAddProfileClick(profile: Profile) {
         val intent = Intent(this@ApplicantsActivity, NewApplicantsActivity::class.java)
-        startActivityForResult(intent, newWordActivityRequestCode)
+        startActivity(intent)
 
     }
 
@@ -153,6 +130,8 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         intent.putExtra("oldLastName", profile.lastName)
         intent.putExtra("oldLocation", profile.location)
         intent.putExtra("oldJob", profile.job)
+        intent.putExtra("oldEducation", profile.education)
+        intent.putExtra("visibility", profile.visibility)
         startActivity(intent)
     }
 
@@ -162,9 +141,9 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
         super.onActivityResult(requestCode, resultCode, intentData)
 
-        if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
+        if (requestCode == newActivityRequestCode && resultCode == Activity.RESULT_OK) {
             intentData?.getStringExtra(ApplicantsActivity.EXTRA_REPLY)?.let { reply ->
-                val profile = Profile(reply, reply, reply, reply)
+                val profile = Profile(reply, reply, reply, reply, reply, true)
                 applicantsViewModel.insertProfile(profile)
             }
         } else {

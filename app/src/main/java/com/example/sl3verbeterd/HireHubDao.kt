@@ -21,8 +21,8 @@ interface HireHubDao {
     ////////////////  /// Profile ////  ////////////////
     ////////////////  ////////////////  ////////////////
 
-    //    @Query("UPDATE profile SET visibility = NOT visibility WHERE id = :id")
-//    suspend fun toggleVisibility(id: Int)
+        @Query("UPDATE profile SET visibility = NOT visibility WHERE id = :id")
+    suspend fun toggleVisibility(id: Int)
 
     @Upsert
     suspend fun upsertProfile(profile: Profile)

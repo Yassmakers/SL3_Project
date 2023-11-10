@@ -11,7 +11,6 @@ import com.example.sl3verbeterd.HireHubApplication
 import com.example.sl3verbeterd.MainActivity
 import com.example.sl3verbeterd.Profile
 import com.example.sl3verbeterd.R
-import com.example.sl3verbeterd.ui.applicant.ApplicantsActivity
 import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModel
 import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModelFactory
 
@@ -36,6 +35,7 @@ class RegisterActivity : AppCompatActivity() {
         val addFirstName = findViewById<EditText>(R.id.first_name)
         val addLastName = findViewById<EditText>(R.id.last_name)
         val addLocation = findViewById<EditText>(R.id.location)
+        val addEducation = findViewById<EditText>(R.id.education)
         val addJob = findViewById<EditText>(R.id.job)
 
 
@@ -47,6 +47,7 @@ class RegisterActivity : AppCompatActivity() {
             val lastName = addLastName.text.toString()
             val location = addLocation.text.toString()
             val job = addJob.text.toString()
+            val education = addEducation.text.toString()
 
             // Account
             val userName = addUserName.text.toString()
@@ -57,7 +58,9 @@ class RegisterActivity : AppCompatActivity() {
                     firstName = firstName,
                     lastName = lastName,
                     location = location,
-                    job = job
+                    job = job,
+                    education = education,
+                    visibility = true
                 )
                 applicantsViewModel.insertProfile(profile)
                 val account = Account(username = userName, password = passWord, role = role)

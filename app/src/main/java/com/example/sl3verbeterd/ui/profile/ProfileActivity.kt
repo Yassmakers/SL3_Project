@@ -6,16 +6,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sl3verbeterd.R
-import com.example.sl3verbeterd.ui.auth.UserProfile
 import android.content.Intent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.sl3verbeterd.HireHubApplication
-import com.example.sl3verbeterd.HireHubRepository
 import com.example.sl3verbeterd.Profile
 import com.example.sl3verbeterd.ProfileListAdapter
 import com.example.sl3verbeterd.ui.applicant.ApplicantsActivity
@@ -25,7 +20,6 @@ import com.example.sl3verbeterd.ui.applicant.NewApplicantsActivity
 import com.example.sl3verbeterd.ui.applicant.ProfileDetailsActivity
 import com.example.sl3verbeterd.ui.applicant.UpdateApplicantsActivity
 import com.example.sl3verbeterd.ui.auth.LandingActivity
-import kotlin.properties.Delegates
 
 class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListener{
 
@@ -60,7 +54,8 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
             val profileName = "${it.firstName} ${it.lastName}"
             val profileJob = "Functie: ${it.job}"
             val profileLocation = "Location: ${it.location}"
-            val profileEducation = "Opleidingsniveau: ${it.location}"
+            val profileEducation = "Opleidingsniveau: ${it.education}"
+
 
             userID = it.id
 
@@ -77,6 +72,8 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
                 lastName = it.lastName,
                 location = it.location,
                 job = it.job,
+                education = it.education,
+                visibility = it.visibility,
                 id = it.id
             )
         }

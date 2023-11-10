@@ -26,9 +26,10 @@ class MainActivity : AppCompatActivity() {
 
         // Retrieve the user's role from the session, default to "guest" if not provided
         val role = intent.getStringExtra("role") ?: "guest"
+        val username = intent.getStringExtra("username") ?: "Gast"
         val id = intent.getIntExtra("id", 0)
 
-        Log.d("MainActivity", "Received Role: $role, Received ID: $id")
+        Log.d("MainActivity", "Received Role: $role, Received ID: $id, Received Name: $username")
 
         // Hide "Applicants" and "Dboard" buttons if the user has a "guest" role
         if (role == "guest") {
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, LandingActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
-                finish() // Finish MainActivity to prevent going back to it
+                finish()
             }
         }
 
@@ -98,6 +99,7 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("role", role) // Pass the user's role to ProfileActivity if needed
                 intent.putExtra("id", id)
                 startActivity(intent)
+                finish()
             }
             "dashboard" -> {
                 // Implement behavior for the dashboard button

@@ -50,16 +50,20 @@ class LoginActivity : AppCompatActivity() {
                     if (accountState.isAuthenticated) {
                         showLoginSuccessDialog()
 
-                        val intent: Intent = if (accountState.role == "admin") {
+                        val intent: Intent = if (accountState.role == "guest") {
+                            Intent(this@LoginActivity, MainActivity::class.java)
 
-                            Intent(this@LoginActivity, ApplicantsActivity::class.java).apply {
-                                putExtra("role", accountState.role) // Pass the user's role to ApplicantsActivity
-                                putExtra("id", accountState.id)
-                            }
                         } else {
 
-                            Intent(this@LoginActivity, MainActivity::class.java)
+                        Intent(this@LoginActivity, MainActivity::class.java).apply {
+                            putExtra("role", accountState.role) // Pass the user's role to ApplicantsActivity
+                            putExtra("id", accountState.id)
+                            putExtra("username", username)
                         }
+                        }
+
+
+
                         startActivity(intent)
                         finish()
                     } else {
@@ -70,8 +74,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         registerButton.setOnClickListener {
-            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         guestButton.setOnClickListener {

@@ -1,5 +1,4 @@
 package com.example.sl3verbeterd.ui.profile
-
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -28,6 +27,7 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
     private lateinit var job: TextView
     private lateinit var location: TextView
     private lateinit var education: TextView
+
     private val applicantsViewModel: ApplicantsViewModel by viewModels {
         ApplicantsViewModelFactory((applicationContext as HireHubApplication).repository)
     }

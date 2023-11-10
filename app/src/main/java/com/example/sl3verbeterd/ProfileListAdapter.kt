@@ -46,12 +46,16 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
         private val addButton: Button = itemView.findViewById(R.id.button_add)
         private val updateButton: Button = itemView.findViewById(R.id.button_update)
         private val showDetailsButton: Button = itemView.findViewById(R.id.button_show_details)
+        private val switchButton: Button = itemView.findViewById(R.id.button_visibility)
         fun bind(profile: Profile, clickListener: ProfileClickListener) {
             profileItemView.text = profile.firstName
             itemView.setOnClickListener { clickListener.onProfileClick(profile) }
 
             // Set click listener for the delete button
             deleteButton.setOnClickListener { clickListener.onDeleteClick(profile) }
+
+            // Set click listener for the switch button
+            switchButton.setOnClickListener { clickListener.onToggleVisibilityClick(profile) }
 
 //             Set click listener for the reset button
             resetButton.setOnClickListener { clickListener.onResetProfileClick(profile) }

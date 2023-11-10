@@ -73,7 +73,7 @@ abstract class HireHubDatabase: RoomDatabase() {
 
                 var account = Account("Admin", "Admin123", "admin")
                 hireHubDao.insertAccount(account)
-                var profile = Profile("René", "Prinz", "Almere", "Docent ICT", "HBO", true)
+                var profile = Profile("René", "Prinz", "Rotterdam", "Docent ICT", "HBO", true)
                 hireHubDao.insertProfile(profile)
 
             // Recruiter
@@ -87,61 +87,61 @@ abstract class HireHubDatabase: RoomDatabase() {
                 // User 1
             account = Account("Gebruiker", "Gebruiker123", "user")
             hireHubDao.insertAccount(account)
-            profile = Profile("Jeffrey", "Tang", "Almere", "Software Developer", "MBO", true)
+            profile = Profile("Jan", "Zuur", "Utrecht", "Software Developer", "MBO", true)
             hireHubDao.insertProfile(profile)
 
                 // User 2
             account = Account("Jaap", "Jaap123", "user")
             hireHubDao.insertAccount(account)
-            profile = Profile("Jaap", "Grotebroek", "Amsterdam", "Software Developer", "MBO", true)
+            profile = Profile("Jaap", "Grotebroek", "Amsterdam", "Helpdesk", "HBO", true)
             hireHubDao.insertProfile(profile)
 
                 // User 3
             account = Account("Douwe", "Douwe123", "user")
             hireHubDao.insertAccount(account)
-            profile = Profile("Douwe", "van Velden", "Almere", "Software Developer", "MBO", false)
+            profile = Profile("Douwe", "van Velden", "Almere", "Verkoper", "WO", false)
             hireHubDao.insertProfile(profile)
 
                 // User 4
-            account = Account("Gebruiker1", "Gebruiker1123", "user")
+            account = Account("Esmee", "Esmee123", "user")
             hireHubDao.insertAccount(account)
-            profile = Profile("Jeffrey", "Tang", "Almere", "Software Developer", "MBO", true)
+            profile = Profile("Esmee", "van de Twee", "Zoetermeer", "Software Developer", "MBO", true)
             hireHubDao.insertProfile(profile)
 
                 // User 5
-            account = Account("Gebruiker1", "Gebruiker1123", "user")
+            account = Account("Rudy", "Rudy123", "user")
             hireHubDao.insertAccount(account)
-            profile = Profile("Jeffrey", "Tang", "Almere", "Software Developer", "MBO", false)
+            profile = Profile("Rudy", "Dondersteen", "Bleiswijk", "Software Developer", "Middelbare School", false)
             hireHubDao.insertProfile(profile)
 
                 // User 6
-            account = Account("Gebruiker1", "Gebruiker1123", "user")
+            account = Account("Paula", "Paula123", "user")
             hireHubDao.insertAccount(account)
-            profile = Profile("Jeffrey", "Tang", "Almere", "Software Developer", "MBO", true)
+            profile = Profile("Paula", "Mel", "De Gooi", "DevOpser", "MBO", true)
             hireHubDao.insertProfile(profile)
 
                 // User 7
-            account = Account("Gebruiker1", "Gebruiker1123", "user")
+            account = Account("Jeffrey", "Jeffrey123", "user")
             hireHubDao.insertAccount(account)
-            profile = Profile("Jeffrey", "Tang", "Almere", "Software Developer", "MBO", true)
+            profile = Profile("Jeffrey", "Tang", "Almere-Stad", "Designer", "Basisschool", true)
             hireHubDao.insertProfile(profile)
 
                 // User 8
-            account = Account("Gebruiker1", "Gebruiker1123", "user")
+            account = Account("Charlie", "Charlie123", "user")
             hireHubDao.insertAccount(account)
-            profile = Profile("Jeffrey", "Tang", "Almere", "Software Developer", "MBO", true)
+            profile = Profile("Charlie", "der Boom", "Almere-Buiten", "Tester", "Zelf", false)
             hireHubDao.insertProfile(profile)
 
                 // User 9
-            account = Account("Gebruiker1", "Gebruiker1123", "user")
+            account = Account("Yassine", "Yassine123", "user")
             hireHubDao.insertAccount(account)
-            profile = Profile("Jeffrey", "Tang", "Almere", "Software Developer", "MBO", true)
+            profile = Profile("Yassine", "Messaoudi", "Maastricht", "Software Developer", "Youtube", true)
             hireHubDao.insertProfile(profile)
 
                 // User 10
-            account = Account("Gebruiker1", "Gebruiker1123", "user")
+            account = Account("Jos", "Jos123", "user")
             hireHubDao.insertAccount(account)
-            profile = Profile("Jeffrey", "Tang", "Almere", "Software Developer", "MBO", true)
+            profile = Profile("Jos", "Hamer", "Den Haag", "UI Designer", "Basisschool", false)
             hireHubDao.insertProfile(profile)
 
 

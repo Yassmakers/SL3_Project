@@ -19,6 +19,7 @@ import androidx.activity.viewModels
 
 import androidx.lifecycle.observe
 import com.example.sl3verbeterd.MainActivity
+import com.example.sl3verbeterd.ui.auth.RegisterActivity
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -35,6 +36,7 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_applicants)
 
+        val id = intent.getIntExtra("id", 0)
         val layoutRole = intent.getStringExtra("role") ?: "guest"
         val role = intent.getStringExtra("role") ?: "guest"
 
@@ -45,13 +47,20 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
+            if (role == "admin"){
             val intent = Intent(this@ApplicantsActivity, NewApplicantsActivity::class.java)
             startActivity(intent)
+            } else {
+                val intent = Intent(this@ApplicantsActivity, RegisterActivity::class.java)
+                intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+                intent.putExtra("id", id)
+                startActivity(intent)
+            }
         }
 
-        // Retrieve user's role from the intent extras
+   
 
-        val id = intent.getIntExtra("id", 0)
+
         Log.d("ApplicantsActivity", "Received Role: $role, Received ID: $id")
 
         val navHome = findViewById<Button>(R.id.nav_home_button)
@@ -110,8 +119,19 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
     }
 
     override fun onAddProfileClick(profile: Profile) {
-        val intent = Intent(this@ApplicantsActivity, NewApplicantsActivity::class.java)
-        startActivity(intent)
+        val role = intent.getStringExtra("role") ?: "guest"
+        val id = intent.getIntExtra("id", 0)
+        if (role == "admin"){
+            val intent = Intent(this@ApplicantsActivity, NewApplicantsActivity::class.java)
+            startActivity(intent)
+        } else {
+            val intent = Intent(this@ApplicantsActivity, RegisterActivity::class.java)
+            intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+            intent.putExtra("id", id)
+            startActivity(intent)
+            }
+
+
 
     }
 

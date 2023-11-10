@@ -11,8 +11,10 @@ import com.example.sl3verbeterd.HireHubApplication
 import com.example.sl3verbeterd.MainActivity
 import com.example.sl3verbeterd.Profile
 import com.example.sl3verbeterd.R
+import com.example.sl3verbeterd.ui.applicant.ApplicantsActivity
 import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModel
 import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModelFactory
+import com.example.sl3verbeterd.ui.applicant.NewApplicantsActivity
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -52,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
             // Account
             val userName = addUserName.text.toString()
             val passWord = addPassWord.text.toString()
-            val role = "user"
+            val roleUser = "user"
             if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
                 val profile = Profile(
                     firstName = firstName,
@@ -62,11 +64,29 @@ class RegisterActivity : AppCompatActivity() {
                     education = education,
                     visibility = true
                 )
+
+
                 applicantsViewModel.insertProfile(profile)
-                val account = Account(username = userName, password = passWord, role = role)
+                val account = Account(username = userName, password = passWord, role = roleUser)
                 applicantsViewModel.insertAccount(account)
-                val intent = Intent(this@RegisterActivity, MainActivity::class.java)
-                startActivity(intent)
+
+
+
+
+                val role = intent.getStringExtra("role") ?: "guest"
+                val id = intent.getIntExtra("id", 0)
+                if (role == "recruiter"){
+                    val intent = Intent(this@RegisterActivity, ApplicantsActivity::class.java)
+                    intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+                    intent.putExtra("id", id)
+                    startActivity(intent)
+                } else {
+                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                    startActivity(intent)
+                }
+
+
+
             }
         }
     }

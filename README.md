@@ -105,6 +105,13 @@ Systeemvereisten
 
 
 # Comply or explain
+Tijdens het gebruik nadat we al een APK hadden opgezet kwamen we erachter dat deze twee teksten omgekeerd horen te zijn.
+Als de door ons opgezette APK gebruikt wordt zal er het verkeerde bericht weergeven worden bij de functie, de functionaliteit van de functie werkt wel gewoon.
+We hebben dit voor de deadline in de main branch verbeterd.
+https://gyazo.com/93774060246d0a537258973738987dca
+
+
+
 Activities en Fragments:
 We hebben gekozen voor het gebruik van activities in plaats van fragments in ons project. Waarom? Omdat activities simpeler zijn voor ons project. Ze maken het ontwikkelen makkelijker en zijn beter te begrijpen, vooral als je aan een kleinere app werkt. We wilden ons project niet onnodig ingewikkeld maken met complexe schermovergangen, en activities pasten beter bij onze behoeften. Het bespaarde ons tijd en zorgde ervoor dat we minder fouten maakten, wat het ontwikkelproces sneller en soepeler maakte.
 

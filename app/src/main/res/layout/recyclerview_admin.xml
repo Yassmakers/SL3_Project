@@ -60,11 +60,16 @@
             android:progressTint="#FFA500" />
     </LinearLayout>
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp">
 
     <Button
         android:id="@+id/button_delete"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
 
@@ -72,7 +77,7 @@
 
     <Button
         android:id="@+id/button_add"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_red_dark"
         android:backgroundTint="@android:color/holo_red_dark"
@@ -81,18 +86,28 @@
         />
     <Button
         android:id="@+id/button_update"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/black"
         android:text="Update"
 
         />
 
-    <Button
-        android:id="@+id/button_show_details"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/button_show_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Details" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show Details" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp">
+
+
 
     <Button
         android:id="@+id/button_reset"
@@ -102,9 +117,11 @@
 
     <Button
         android:id="@+id/button_visibility"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profiel zichtbaarheid wijzigen" />
+        android:text="Zichtbaarheid wijzigen" />
+    </LinearLayout>
 
 
 

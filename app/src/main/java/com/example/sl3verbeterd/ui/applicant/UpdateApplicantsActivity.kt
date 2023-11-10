@@ -34,6 +34,7 @@ class UpdateApplicantsActivity : AppCompatActivity() {
         val id = intent.getStringExtra("id")!!.toInt()
         val role = intent.getStringExtra("role") ?: "guest"
         var oldRole: String? = null
+        val userID = intent.getIntExtra("userID", 0)
 
 
 
@@ -50,8 +51,9 @@ class UpdateApplicantsActivity : AppCompatActivity() {
 
         val addUserName = findViewById<EditText>(R.id.user_name)
         val addPassWord = findViewById<EditText>(R.id.password)
-        addUserName.visibility = if (role == "admin") View.VISIBLE else View.INVISIBLE
-        addPassWord.visibility = if (role == "admin") View.VISIBLE else View.INVISIBLE
+        addUserName.visibility = if (role == "admin" || userID == id) View.VISIBLE else View.INVISIBLE
+        addPassWord.visibility = if (role == "admin" || userID == id) View.VISIBLE else View.INVISIBLE
+
 
         applicantsViewModel.getProfileAndAccountById(id).observe(this) { accountProfile ->
             val oldUserName = accountProfile.username

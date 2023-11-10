@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.sl3verbeterd.R
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
@@ -180,6 +181,16 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
     override fun onToggleVisibilityClick(profile: Profile) {
         val id = profile.id
         applicantsViewModel.toggleVisibility(id)
+
+        // Show a message indicating that visibility has been toggled
+        val message = if (profile.visibility) {
+            "Profiel zichtbaar"
+        } else {
+            "Profiel niet zichtbaar"
+        }
+
+        // Use a Toast to display the message
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun showProfile(id: Int) {
@@ -225,6 +236,8 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
 
     override fun onUpdateProfileClick(profile: Profile) {
         val role = intent.getStringExtra("role") ?: "guest"
+        val userID = intent.getIntExtra("id", 0)
+
         val intent = Intent(this@ProfileActivity, UpdateApplicantsActivity::class.java)
         intent.putExtra("id", "${profile.id}")
         intent.putExtra("oldFirstName", profile.firstName)
@@ -233,6 +246,7 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
         intent.putExtra("oldEducation", profile.education)
         intent.putExtra("oldJob", profile.job)
         intent.putExtra("oldRole", role)
+        intent.putExtra("userID", userID)
         startActivity(intent)
     }
 

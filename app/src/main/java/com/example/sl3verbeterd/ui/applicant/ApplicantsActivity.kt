@@ -55,19 +55,19 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
                 intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
                 intent.putExtra("id", id)
             startActivity(intent)
+                finish()
             } else {
                 val intent = Intent(this@ApplicantsActivity, RegisterActivity::class.java)
                 intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
                 intent.putExtra("id", id)
                 startActivity(intent)
+                finish()
             }
         }
 
         val navHomeButton = findViewById<Button>(R.id.nav_home_button)
         val navApplicantsButton = findViewById<Button>(R.id.nav_applicants_button)
         val navProfileButton = findViewById<Button>(R.id.nav_profile_button)
-
-        // Retrieve the user's role from the session, default to "guest" if not provided
 
 
 

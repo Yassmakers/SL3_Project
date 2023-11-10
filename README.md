@@ -8,6 +8,7 @@ Dit is de handleiding voor de HireHub Kotlin-applicatie, een project dat gericht
 - [Inloggegevens](#inloggegevens)
 - [Systeemvereisten](#systeemvereisten)
 - [Database migratie](#database-migratie)
+- - [Comply and explain](#comply-and-explain)
 - [Gebruikershandleiding](#gebruikershandleiding)
     - [Inloggen](#inloggen)
     - [Navigatie](#navigatie)
@@ -103,6 +104,7 @@ Systeemvereisten
 - Klik op 'Reset Profiel' om een Account met het profiel standaard waarden te geven resetten naar default (Soft-delete).
 
 
+# Comply and explain
 
 
 # Screenshots

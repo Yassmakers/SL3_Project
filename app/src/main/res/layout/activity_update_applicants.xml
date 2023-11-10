@@ -66,6 +66,7 @@
         android:minHeight="@dimen/min_height"
         android:fontFamily="sans-serif-light"
         android:hint="Username"
+        android:visibility="invisible"
         android:inputType="textAutoComplete"
         android:layout_margin="@dimen/big_padding"
         android:textSize="18sp" />
@@ -77,6 +78,7 @@
         android:minHeight="@dimen/min_height"
         android:fontFamily="sans-serif-light"
         android:hint="Password"
+        android:visibility="invisible"
         android:inputType="textPassword"
         android:layout_margin="@dimen/big_padding"
         android:textSize="18sp" />

@@ -25,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListener {
 
     private val newActivityRequestCode = 1
-    private lateinit var role: String // Declare role variable to store user's role
+
 
     private val applicantsViewModel: ApplicantsViewModel by viewModels {
         ApplicantsViewModelFactory((applicationContext as HireHubApplication).repository)
@@ -94,8 +94,10 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         // Implement the behavior for showing profile details based on the provided id.
         // You can navigate to a new activity or fragment to show the details.
         // Example:
+        val role = intent.getStringExtra("role") ?: "guest"
         val intent = Intent(this@ApplicantsActivity, ProfileDetailsActivity::class.java)
         intent.putExtra("profileId", id)
+        intent.putExtra("role", role)
         startActivity(intent)
     }
 
@@ -131,7 +133,7 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
 
 
     override fun onUpdateProfileClick(profile: Profile) {
-
+        val role = intent.getStringExtra("role") ?: "guest"
         val intent = Intent(this@ApplicantsActivity, UpdateApplicantsActivity::class.java)
         intent.putExtra("id", "${profile.id}")
         intent.putExtra("oldFirstName", profile.firstName)
@@ -139,7 +141,9 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         intent.putExtra("oldLocation", profile.location)
         intent.putExtra("oldJob", profile.job)
         intent.putExtra("oldEducation", profile.education)
-        intent.putExtra("visibility", profile.visibility)
+        intent.putExtra("oldVisibility", profile.visibility.toString())
+
+        intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
         startActivity(intent)
     }
 

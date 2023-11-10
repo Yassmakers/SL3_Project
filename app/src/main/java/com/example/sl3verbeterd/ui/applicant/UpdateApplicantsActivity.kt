@@ -2,6 +2,8 @@ package com.example.sl3verbeterd.ui.applicant
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import com.example.sl3verbeterd.R
 
 import android.widget.Button
@@ -27,12 +29,15 @@ class UpdateApplicantsActivity : AppCompatActivity() {
 
 
         val id = intent.getStringExtra("id")!!.toInt()
+        val role = intent.getStringExtra("role") ?: "guest"
+        var oldRole: String? = null
+
+
 
 
 //         Account
-        val addUserName = findViewById<EditText>(R.id.user_name)
-        val addPassWord = findViewById<EditText>(R.id.password)
 
+        Log.d("ApplicantsActivity", "Received Role: $role")
         // Profile
         val addFirstName = findViewById<EditText>(R.id.first_name)
         val addLastName = findViewById<EditText>(R.id.last_name)
@@ -40,6 +45,19 @@ class UpdateApplicantsActivity : AppCompatActivity() {
         val addJob = findViewById<EditText>(R.id.job)
         val addEducation = findViewById<EditText>(R.id.education)
 
+        val addUserName = findViewById<EditText>(R.id.user_name)
+        val addPassWord = findViewById<EditText>(R.id.password)
+        addUserName.visibility = if (role == "admin") View.VISIBLE else View.INVISIBLE
+        addPassWord.visibility = if (role == "admin") View.VISIBLE else View.INVISIBLE
+
+        applicantsViewModel.getProfileAndAccountById(id).observe(this) { accountProfile ->
+            val oldUserName = accountProfile.username
+            val oldPassWord = accountProfile.password
+            oldRole = accountProfile.role
+
+            addUserName.setText(oldUserName)
+            addPassWord.setText(oldPassWord)
+        }
 
         val oldFirstName = intent.getStringExtra("oldFirstName").toString()
         findViewById<EditText>(R.id.first_name).apply{
@@ -67,12 +85,8 @@ class UpdateApplicantsActivity : AppCompatActivity() {
             hint = oldJob
         }
 
-        val oldRole = intent.getStringExtra("oldRole").toString()
-        findViewById<EditText>(R.id.job).apply{
-            hint = oldJob
-        }
 
-        val visibility = intent.getStringExtra("visibility").toBoolean()
+        val visibility = intent.getStringExtra("oldVisibility").toBoolean()
 
 
 
@@ -80,6 +94,11 @@ class UpdateApplicantsActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.button_save)
 
         button.setOnClickListener {
+
+            //Account
+            val userName = addUserName.text.toString()
+            val passWord = addPassWord.text.toString()
+
             // Profile
             val firstName = addFirstName.text.toString()
             val lastName = addLastName.text.toString()
@@ -87,22 +106,28 @@ class UpdateApplicantsActivity : AppCompatActivity() {
             val job = addJob.text.toString()
             val education = addEducation.text.toString()
 
-            // Account
-            val userName = addUserName.text.toString()
-            val passWord = addPassWord.text.toString()
+
 
 
 
             if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
+
+
+                val account = Account(username = userName, password = passWord, role = oldRole ?: "", id = id)
                 val profile = Profile(firstName = firstName, lastName = lastName, location = location, job = job, education = education, id = id, visibility = visibility)
-                val account = Account(username = userName, password = passWord, role = oldRole, id = id)
+
+
+
+
 
                 // Update profile and account details
                 applicantsViewModel.updateProfile(profile)
                 applicantsViewModel.updateAccount(account)
 
+
+
                 // Display success message
-                Toast.makeText(this, "Profile and Account details updated successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Details updated successfully", Toast.LENGTH_SHORT).show()
 
                 // Close the current activity
                 finish()

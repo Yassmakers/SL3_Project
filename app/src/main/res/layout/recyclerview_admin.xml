@@ -66,7 +66,6 @@
         android:id="@+id/button_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:text="Delete"
 
         />
@@ -77,7 +76,6 @@
         android:layout_height="wrap_content"
         android:background="@android:color/holo_red_dark"
         android:backgroundTint="@android:color/holo_red_dark"
-        android:visibility="gone"
         android:text="Add"
         />
     <Button
@@ -85,7 +83,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/black"
-        android:visibility="gone"
         android:text="Update"
 
         />
@@ -94,11 +91,7 @@
         android:id="@+id/button_show_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Details"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Show Details" />
 
     <Button
         android:id="@+id/button_reset"
@@ -111,7 +104,6 @@
         android:id="@+id/button_visibility"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:text="Profiel zichtbaarheid wijzigen" />
 
 

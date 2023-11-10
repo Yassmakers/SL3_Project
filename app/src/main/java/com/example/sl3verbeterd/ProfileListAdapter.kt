@@ -40,7 +40,11 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
 
 
     class ProfileViewHolder(itemView: View, private val clickListener: ProfileClickListener) : RecyclerView.ViewHolder(itemView) {
-        private val profileItemView: TextView = itemView.findViewById(R.id.textView)
+        private val nameView: TextView = itemView.findViewById(R.id.name)
+        private val jobView: TextView = itemView.findViewById(R.id.job)
+        private val locationView: TextView = itemView.findViewById(R.id.location)
+        private val educationView: TextView = itemView.findViewById(R.id.education)
+
         private val deleteButton: Button = itemView.findViewById(R.id.button_delete)
         private val resetButton: Button = itemView.findViewById(R.id.button_reset)
         private val addButton: Button = itemView.findViewById(R.id.button_add)
@@ -48,7 +52,13 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
         private val showDetailsButton: Button = itemView.findViewById(R.id.button_show_details)
         private val switchButton: Button = itemView.findViewById(R.id.button_visibility)
         fun bind(profile: Profile, clickListener: ProfileClickListener) {
-            profileItemView.text = profile.firstName
+            nameView.text = "${profile.firstName} ${profile.lastName}"
+            jobView.text = profile.job
+            locationView.text = profile.location
+            educationView.text = profile.education
+
+
+
             itemView.setOnClickListener { clickListener.onProfileClick(profile) }
 
             // Set click listener for the delete button

@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sl3verbeterd.ProfileListAdapter.ProfileViewHolder
-class ProfileListAdapter(private val clickListener: ProfileClickListener) :
+class ProfileListAdapter(private val clickListener: ProfileClickListener,
+                         private val layoutRole: String ) :
     ListAdapter<Profile, ProfileListAdapter.ProfileViewHolder>(PROFILES_COMPARATOR) {
 
     interface ProfileClickListener {
@@ -27,7 +28,7 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
-        return ProfileViewHolder.create(parent, clickListener)
+        return ProfileViewHolder.create(parent, clickListener, layoutRole)
     }
 
 
@@ -82,9 +83,14 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
         }
 
         companion object {
-            fun create(parent: ViewGroup, clickListener: ProfileClickListener): ProfileViewHolder {
+            fun create(parent: ViewGroup, clickListener: ProfileClickListener, layoutRole: String): ProfileViewHolder {
+                val layoutId = when (layoutRole) {
+                    "admin" -> R.layout.recyclerview_admin
+                    else -> R.layout.recyclerview_profiles
+                }
+
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.recyclerview_profiles, parent, false)
+                    .inflate(layoutId, parent, false)
 
                 return ProfileViewHolder(view, clickListener)
             }

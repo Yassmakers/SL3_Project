@@ -223,6 +223,7 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
         intent.putExtra("oldFirstName", profile.firstName)
         intent.putExtra("oldLastName", profile.lastName)
         intent.putExtra("oldLocation", profile.location)
+        intent.putExtra("oldEducation", profile.education)
         intent.putExtra("oldJob", profile.job)
         intent.putExtra("oldRole", role)
         startActivity(intent)

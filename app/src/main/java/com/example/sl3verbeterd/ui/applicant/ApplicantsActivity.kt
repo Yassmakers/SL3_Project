@@ -35,8 +35,11 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_applicants)
 
+        val layoutRole = intent.getStringExtra("role") ?: "guest"
+        val role = intent.getStringExtra("role") ?: "guest"
+
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = ProfileListAdapter(this) // Initialize adapter with the listener
+        val adapter = ProfileListAdapter(this, layoutRole) // Initialize adapter with the listener
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -47,7 +50,7 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         }
 
         // Retrieve user's role from the intent extras
-        val role = intent.getStringExtra("role") ?: "guest"
+
         val id = intent.getIntExtra("id", 0)
         Log.d("ApplicantsActivity", "Received Role: $role, Received ID: $id")
 

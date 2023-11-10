@@ -34,8 +34,10 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val layoutRole: String = "Guest"
+
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = ProfileListAdapter(this) // Initialize adapter with the listener
+        val adapter = ProfileListAdapter(this, layoutRole) // Initialize adapter with the listener
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 

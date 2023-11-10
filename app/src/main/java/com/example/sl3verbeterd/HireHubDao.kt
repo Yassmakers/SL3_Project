@@ -15,7 +15,15 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface HireHubDao {
 
-    // Combination of Insert and Update
+
+
+    ////////////////  ////////////////  ////////////////
+    ////////////////  /// Profile ////  ////////////////
+    ////////////////  ////////////////  ////////////////
+
+    //    @Query("UPDATE profile SET visibility = NOT visibility WHERE id = :id")
+//    suspend fun toggleVisibility(id: Int)
+
     @Upsert
     suspend fun upsertProfile(profile: Profile)
 
@@ -31,21 +39,9 @@ interface HireHubDao {
     @Query("SELECT * FROM profile WHERE id IS :id")
     fun showProfile(id: Int) : LiveData<Profile>
 
-
-    @Query("DELETE FROM account WHERE id IS :id")
-    suspend fun deleteAccountToo(id: Int)
-
-//    @Query("SELECT * FROM profile")
-//    fun showProfile(id: Int) : LiveData<Profile>
-
-
     @Update
     suspend fun updateProfile(profile: Profile)
 
-    //Custom Queries
-
-    // Flow is a data structure that observes any changes in the list.
-    // And updates the list.
     @Query("SELECT * FROM profile ORDER BY firstName ASC")
     fun getProfilesOrderedByFirstName(): Flow<List<Profile>>
 
@@ -55,22 +51,14 @@ interface HireHubDao {
     @Query("SELECT * FROM profile WHERE id = :profileId")
     fun getProfileById(profileId: Int): LiveData<Profile>
 
-
-//    @Query("UPDATE profile SET firstName=:firstName WHERE id LIKE :id")
-//    suspend fun updateProfile(firstName: String, id: Int)
-    @Query("SELECT * FROM account WHERE username = :username")
-    suspend fun getUserByUsername(username: String) : Account?
+    @Query("UPDATE profile SET firstName='Voornaam', lastName='Achternaam', location='Woonplaats', job='Je functie' WHERE id = :id")
+    suspend fun resetProfile(id: Int)
 
 
-//    @Query("SELECT * FROM account ORDER BY username ASC")
-//    fun getAccountsOrderedByFirstName(): Flow<List<Profile>>
+    ////////////////  ////////////////  ////////////////
+    ////////////////  /// Account ////  ////////////////
+    ////////////////  ////////////////  ////////////////
 
-
-    @Transaction
-    @Query("SELECT * FROM profile INNER JOIN account ON profile.id = account.id WHERE profile.id = :id")
-    fun getProfileAndAccountById(id: Int): LiveData<ProfileAndAccount>
-
-    // Combination of Insert and Update
     @Upsert
     suspend fun upsertAccount(account: Account)
 
@@ -83,22 +71,31 @@ interface HireHubDao {
     @Update
     suspend fun updateAccount(account: Account)
 
+    @Query("DELETE FROM account WHERE id IS :id")
+    suspend fun deleteAccountToo(id: Int)
 
+    @Query("SELECT * FROM account WHERE username = :username")
+    suspend fun getUserByUsername(username: String) : Account?
 
-    //Custom Queries
+    ////////////////  ////////////////  ////////////////
+    /// Account ////  ///// And //////  /// Profile ////
+    ////////////////  ////////////////  ////////////////
 
-    // Flow is a data structure that observes any changes in the list.
-    // And updates the list.
-//    @Query("SELECT * FROM Account ORDER BY firstName ASC")
-//    fun getAccountsOrderedByFirstName(): Flow<List<Account>>
-//
-//    @Query("SELECT * FROM Account ORDER BY lastName ASC")
-//    fun getAccountsOrderedByLastName(): Flow<List<Account>>
-//
-//    @Query("SELECT * FROM Account ORDER BY phoneNumber ASC")
-//    fun getAccountsOrderedByPhoneNumber(): Flow<List<Account>>
-//
-//
-//    @Query("UPDATE Account SET firstName=:firstName WHERE id LIKE :id")
-//    suspend fun updateAccount(firstName: String, id: Int)
+    @Transaction
+    @Query("SELECT * FROM profile INNER JOIN account ON profile.id = account.id WHERE profile.id = :id")
+    fun getProfileAndAccountById(id: Int): LiveData<ProfileAndAccount>
 }
+
+
+////////////////  ////////////////  ////////////////
+////////////////  /// Profile ////  ////////////////
+////////////////  ////////////////  ////////////////
+
+
+////////////////  ////////////////  ////////////////
+////////////////  /// Account ////  ////////////////
+////////////////  ////////////////  ////////////////
+
+////////////////  ////////////////  ////////////////
+/// Account ////  ///// And //////  /// Profile ////
+////////////////  ////////////////  ////////////////

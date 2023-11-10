@@ -17,6 +17,10 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
         hireHubDao.insertProfile(profile)
     }
 
+    suspend fun resetProfile(id: Int) {
+        hireHubDao.resetProfile(id)
+    }
+
     fun getProfileAndAccountById(id: Int): LiveData<ProfileAndAccount> {
         return hireHubDao.getProfileAndAccountById(id)
     }

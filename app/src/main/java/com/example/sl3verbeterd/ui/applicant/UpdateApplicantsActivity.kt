@@ -71,6 +71,11 @@ class UpdateApplicantsActivity : AppCompatActivity() {
             hint = oldJob
         }
 
+        val oldRole = intent.getStringExtra("oldRole").toString()
+        findViewById<EditText>(R.id.job).apply{
+            hint = oldJob
+        }
+
 
 
 
@@ -95,7 +100,7 @@ class UpdateApplicantsActivity : AppCompatActivity() {
 
             if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
                 val profile = Profile(firstName = firstName, lastName = lastName, location = location, job = job, id = id)
-                val account = Account(username = userName, password = passWord, role = "user", id = id)
+                val account = Account(username = userName, password = passWord, role = oldRole, id = id)
 
                 // Update profile and account details
                 applicantsViewModel.updateProfile(profile)

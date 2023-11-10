@@ -86,6 +86,11 @@ class ApplicantsViewModel(private val repository: HireHubRepository) : ViewModel
         return repository.getProfileAndAccountById(id)
     }
 
+    fun resetProfile(id: Int) {
+        viewModelScope.launch {
+            repository.resetProfile(id)
+        }
+    }
 
 
     private val _text = MutableLiveData<String>().apply {

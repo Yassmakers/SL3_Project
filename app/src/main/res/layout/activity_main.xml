@@ -8,10 +8,15 @@
     android:paddingTop="?attr/actionBarSize">
 
     <!-- Logout Button -->
+
+    <!-- Navigation Buttons -->
+
     <Button
         android:id="@+id/nav_logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="204dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="480dp"
+        android:layout_marginEnd="104dp"
         android:background="@android:color/holo_red_dark"
         android:backgroundTint="@android:color/holo_red_dark"
         android:text="Logout"
@@ -20,7 +25,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
-    <!-- Navigation Buttons -->
     <LinearLayout
         android:id="@+id/buttonRow"
         android:layout_width="0dp"

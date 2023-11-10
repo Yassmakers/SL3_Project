@@ -87,11 +87,25 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
         val usableUserID = userID
 
         val buttonDelete = findViewById<Button>(R.id.button_delete)
+        val buttonUpdate = findViewById<Button>(R.id.button_update)
+        val buttonReset = findViewById<Button>(R.id.button_reset)
 
         // Set OnClickListener for the delete button
         buttonDelete.setOnClickListener {
             // Call the onDeleteClick method when the delete button is clicked
             onDeleteClick(profile ?: return@setOnClickListener)
+        }
+
+        // Set OnClickListener for the delete button
+        buttonReset.setOnClickListener {
+            // Call the onDeleteClick method when the delete button is clicked
+            onResetProfileClick(profile ?: return@setOnClickListener)
+        }
+
+
+        buttonUpdate.setOnClickListener {
+            // Call the onDeleteClick method when the delete button is clicked
+            onUpdateProfileClick(profile ?: return@setOnClickListener)
         }
 
 
@@ -179,16 +193,20 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
             .show()
     }
 
-
+    override fun onResetProfileClick(profile: Profile) {
+        var id = "${profile.id}".toInt()
+        applicantsViewModel.resetProfile(id)
+    }
 
     override fun onUpdateProfileClick(profile: Profile) {
-
+        val role = intent.getStringExtra("role") ?: "guest"
         val intent = Intent(this@ProfileActivity, UpdateApplicantsActivity::class.java)
         intent.putExtra("id", "${profile.id}")
         intent.putExtra("oldFirstName", profile.firstName)
         intent.putExtra("oldLastName", profile.lastName)
         intent.putExtra("oldLocation", profile.location)
         intent.putExtra("oldJob", profile.job)
+        intent.putExtra("oldRole", role)
         startActivity(intent)
     }
 

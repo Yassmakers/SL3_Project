@@ -20,6 +20,7 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
         fun onAddProfileClick(profile: Profile)
         fun onUpdateProfileClick(profile: Profile)
         fun showProfile(id: Int)
+        fun onResetProfileClick(profile: Profile)
     }
 
 
@@ -40,7 +41,7 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
     class ProfileViewHolder(itemView: View, private val clickListener: ProfileClickListener) : RecyclerView.ViewHolder(itemView) {
         private val profileItemView: TextView = itemView.findViewById(R.id.textView)
         private val deleteButton: Button = itemView.findViewById(R.id.button_delete)
-//        private val deleteReset: Button = itemView.findViewById(R.id.button_reset)
+        private val resetButton: Button = itemView.findViewById(R.id.button_reset)
         private val addButton: Button = itemView.findViewById(R.id.button_add)
         private val updateButton: Button = itemView.findViewById(R.id.button_update)
         private val showDetailsButton: Button = itemView.findViewById(R.id.button_show_details)
@@ -51,8 +52,8 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
             // Set click listener for the delete button
             deleteButton.setOnClickListener { clickListener.onDeleteClick(profile) }
 
-            // Set click listener for the reset button
-//            resetButton.setOnClickListener { clickListener.onDeleteClick(profile) }
+//             Set click listener for the reset button
+            resetButton.setOnClickListener { clickListener.onResetProfileClick(profile) }
 
             // Set click listener for the add button
             addButton.setOnClickListener { clickListener.onAddProfileClick(profile) }

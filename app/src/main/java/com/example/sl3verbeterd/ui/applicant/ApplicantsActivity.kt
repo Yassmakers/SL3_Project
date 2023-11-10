@@ -23,6 +23,7 @@ import android.app.Activity
 import android.app.Application
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -97,6 +98,10 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
     }
 
     override fun onProfileClick(profile: Profile) {
+        // Handle profile click
+    }
+
+    override fun onResetProfileClick(profile: Profile) {
         // Handle profile click
     }
 

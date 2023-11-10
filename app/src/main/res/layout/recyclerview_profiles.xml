@@ -44,4 +44,11 @@
         android:layout_height="wrap_content"
         android:text="Show Details" />
 
+    <Button
+        android:id="@+id/button_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Niet ver" />
+
 </LinearLayout>

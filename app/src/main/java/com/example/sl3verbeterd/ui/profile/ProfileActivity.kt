@@ -184,9 +184,9 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
 
         // Show a message indicating that visibility has been toggled
         val message = if (profile.visibility) {
-            "Profiel zichtbaar"
-        } else {
             "Profiel niet zichtbaar"
+        } else {
+            "Profiel zichtbaar"
         }
 
         // Use a Toast to display the message

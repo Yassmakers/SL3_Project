@@ -52,14 +52,6 @@ Systeemvereisten
     Minimaal Android 6.0 (API-niveau 26)
 
 
-# Database migratie
-
-Voer de database migratie uit door:
-
-    - De juiste configuraties in de HireHubDatabase-klasse te controleren.
-    - De app te compileren en uit te voeren.
-    - De database bij te werken volgens de instructies in het consolevenster.
-
 ## Gebruikershandleiding
 
 ### Inloggen
@@ -118,7 +110,8 @@ https://gyazo.com/d0aaf6c1970cdeb8a776f4519ae6e0c0
 # Aanvullende opmerkingen
 
 ### -
-We willen graag vermelden dat we dit project hebben gemaakt, echter, vanwege ziekte en privésituaties hadden we niet evenveel tijd beschikbaar. Onze coach, Stephan, is op de hoogte van deze omstandigheden. We hopen op begrip voor deze situatie en vragen om coulance bij de beoordeling van onze prestaties.
+We willen graag vermelden dat we dit project hebben gemaakt, echter, vanwege ziekte en privésituaties hadden we niet evenveel tijd beschikbaar. Onze coach, Stephan, is op de hoogte van deze omstandigheden. We hopen op begrip voor deze situatie en vragen om coulance bij de beoordeling van onze prestaties. Mochten jullie meer informatie hierover nodig hebben dan zijn wij beschikbaar voor contact.
+
 
 > 👨‍🎓 **Yassine Messaoudi**
 >

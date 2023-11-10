@@ -8,7 +8,7 @@ Dit is de handleiding voor de HireHub Kotlin-applicatie, een project dat gericht
 - [Inloggegevens](#inloggegevens)
 - [Systeemvereisten](#systeemvereisten)
 - [Database migratie](#database-migratie)
-- [Comply and explain](#comply-and-explain)
+- [Comply or explain](#comply-or-explain)
 - [Gebruikershandleiding](#gebruikershandleiding)
     - [Inloggen](#inloggen)
     - [Navigatie](#navigatie)
@@ -104,8 +104,12 @@ Systeemvereisten
 - Klik op 'Reset Profiel' om een Account met het profiel standaard waarden te geven resetten naar default (Soft-delete).
 
 
-# Comply and explain
+# Comply or explain
+Activities en Fragments:
+We hebben gekozen voor het gebruik van activities in plaats van fragments in ons project. Waarom? Omdat activities simpeler zijn voor ons project. Ze maken het ontwikkelen makkelijker en zijn beter te begrijpen, vooral als je aan een kleinere app werkt. We wilden ons project niet onnodig ingewikkeld maken met complexe schermovergangen, en activities pasten beter bij onze behoeften. Het bespaarde ons tijd en zorgde ervoor dat we minder fouten maakten, wat het ontwikkelproces sneller en soepeler maakte.
 
+DAO, Repository en viewModel:
+In ons project hebben we bewust gekozen voor het gebruik van slechts één DAO, één Repository en één ViewModel. Waarom deze keuze? Simpelweg omdat het een eenvoudige en gemakkelijk te onderhouden aanpak is. Aangezien ons project geen complexe database-interacties of verschillende soorten gegevens heeft, hebben we één DAO en één Repository als efficiënt ervaren. Deze aanpak minimaliseert codeherhaling en zorgt ervoor dat alle gerelateerde logica op een overzichtelijke plek wordt gehouden. Het gebruik van slechts één ViewModel volgt hetzelfde principe, waardoor het vereenvoudigen van code, aanbrengen van wijzigingen en oplossen van problemen een gestroomlijnd proces wordt. Onze benadering volgt het principe van KISS, ookwel Keep It Simple Stupid, wat resulteert in een overzichtelijk project met minder kans op fouten.
 
 # Screenshots
 https://gyazo.com/b743d020e255b1598fd8b59848160ef1

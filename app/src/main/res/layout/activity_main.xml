@@ -29,6 +29,22 @@
         android:background="@android:color/holo_red_dark"
         android:backgroundTint="@android:color/holo_red_dark"
         android:text="Logout"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintBottom_toTopOf="@id/buttonRow"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/nav_register_button"
+        android:layout_marginBottom="8dp"
+        android:layout_width="204dp"
+        android:layout_height="41dp"
+
+        android:layout_marginEnd="104dp"
+        android:background="@android:color/holo_red_dark"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="Registreer"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
 

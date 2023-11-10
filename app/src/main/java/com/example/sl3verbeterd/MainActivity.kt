@@ -20,6 +20,7 @@ import com.example.sl3verbeterd.ui.applicant.NewApplicantsActivity
 import com.example.sl3verbeterd.ui.applicant.ProfileDetailsActivity
 import com.example.sl3verbeterd.ui.applicant.UpdateApplicantsActivity
 import com.example.sl3verbeterd.ui.auth.LandingActivity
+import com.example.sl3verbeterd.ui.auth.RegisterActivity
 import com.example.sl3verbeterd.ui.profile.ProfileActivity
 
 class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListener {
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
         val navApplicantsButton = findViewById<Button>(R.id.nav_applicants_button)
         val navProfileButton = findViewById<Button>(R.id.nav_profile_button)
         val navLogoutButton = findViewById<Button>(R.id.nav_logout_button)
+        val navRegisterButton = findViewById<Button>(R.id.nav_register_button)
 
 
 
@@ -59,8 +61,18 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
         if (role == "guest") {
             navProfileButton.visibility = View.GONE
             navApplicantsButton.visibility = View.GONE
+            navRegisterButton.visibility = View.VISIBLE
+            navRegisterButton.setOnClickListener {
+                // Implement logout functionality here (e.g., clear user session, log out the user)
+
+                // Redirect the user to the landing activity
+                val intent = Intent(this@MainActivity, RegisterActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         } else {
             // Show logout button only for logged-in users
+            navRegisterButton.visibility = View.GONE
             navLogoutButton.visibility = View.VISIBLE
             navLogoutButton.setOnClickListener {
                 // Implement logout functionality here (e.g., clear user session, log out the user)

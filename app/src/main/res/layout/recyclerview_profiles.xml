@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal">
 
     <LinearLayout
         android:id="@+id/profile"
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="0dp"
@@ -90,15 +91,9 @@
 
         />
 
-    <Button
-        android:id="@+id/button_show_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show Details"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+
+
 
     <Button
         android:id="@+id/button_reset"
@@ -113,7 +108,18 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:text="Profiel zichtbaarheid wijzigen" />
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:gravity="center">
 
+    <Button
+        android:id="@+id/button_show_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Details" />
+
+</LinearLayout>
 
 
 </LinearLayout>

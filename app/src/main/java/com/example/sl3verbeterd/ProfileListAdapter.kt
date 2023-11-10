@@ -54,9 +54,9 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener,
         private val switchButton: Button = itemView.findViewById(R.id.button_visibility)
         fun bind(profile: Profile, clickListener: ProfileClickListener) {
             nameView.text = "${profile.firstName} ${profile.lastName}"
-            jobView.text = profile.job
-            locationView.text = profile.location
-            educationView.text = profile.education
+            jobView.text = "Functie: ${profile.job}"
+            locationView.text = "Locatie: ${profile.location}"
+            educationView.text = "Opleidingsniveau: ${profile.education}"
 
 
 

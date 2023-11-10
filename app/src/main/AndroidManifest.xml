@@ -17,16 +17,20 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.applicant.ProfileDetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Profiel Details"/>
         <activity
             android:name=".ui.profile.ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Profiel"/>
         <activity
             android:name=".ui.auth.LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Inloggen"/>
         <activity
             android:name=".ui.auth.RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Account Aanmaken"/>
         <activity
             android:name=".ui.auth.LandingActivity"
             android:exported="true">
@@ -36,21 +40,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.auth.AuthActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.applicant.UpdateApplicantsActivity"
             android:exported="false"
-            android:label="UpdateApplicants" />
+            android:label="Wijzig Gebruiker" />
         <activity
             android:name=".ui.applicant.NewApplicantsActivity"
             android:exported="false"
-            android:label="NewApplicants" />
+            android:label="Account Aanmaken" />
         <activity
             android:name=".ui.applicant.ApplicantsActivity"
             android:exported="true"
-            android:label="Applicants" />
+            android:label="Dashboard" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -86,6 +86,7 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener,
             fun create(parent: ViewGroup, clickListener: ProfileClickListener, layoutRole: String): ProfileViewHolder {
                 val layoutId = when (layoutRole) {
                     "admin" -> R.layout.recyclerview_admin
+                    "recruiter" -> R.layout.recyclerview_recruiter
                     else -> R.layout.recyclerview_profiles
                 }
 

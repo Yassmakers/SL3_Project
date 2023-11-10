@@ -90,7 +90,8 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
     }
 
     override fun onResetProfileClick(profile: Profile) {
-        // Handle profile click
+        val id = "${profile.id}".toInt()
+        applicantsViewModel.resetProfile(id)
     }
 
     override fun onShowDetailsClick(id: Int) {

@@ -10,28 +10,40 @@
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="188dp"
         android:text="HireHub"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/textInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada urna a augue hendrerit, nec dignissim elit tincidunt. Duis vel justo id elit pulvinar sagittis. Ut efficitur, ipsum ut commodo malesuada, erat lectus varius dui, in sodales ligula quam vel libero. Nunc elementum arcu id enim facilisis, vitae ultrices elit efficitur. Nulla facilisi. Proin vel justo vitae leo auctor aliquam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-
-Vivamus sit amet volutpat eros. Integer et nisi vitae quam hendrerit tincidunt ut id dui. Maecenas ullamcorper nisl vel accumsan tincidunt. Sed vitae ipsum ac leo feugiat rhoncus. Nunc et aliquet orci. Fusce vel semper libero, nec ullamcorper massa. Etiam vestibulum odio id efficitur fermentum. Nam bibendum velit vel dui cursus congue
-"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Ontdek de HireHub Resources-app, jouw go-to tool voor HR Recruitment! Waarom? Omdat we denken dat het dingen makkelijker zal maken voor iedereen. Solliciteren wordt leuker en bedrijven vinden sneller de juiste match. Het is een soort proefversie van iets heel gaafs dat eraan komt."
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Jij kunt meedoen! Laat ons weten wat je ervan vindt. Samen maken we de HireHub-app nog beter. Bedankt dat je deel uitmaakt van ons avontuur!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInput" />
+
 
     <LinearLayout
         android:layout_width="match_parent"

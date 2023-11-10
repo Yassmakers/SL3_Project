@@ -2,48 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.applicant.ApplicantsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/nav_logout_button"
+        app:layout_constraintBottom_toTopOf="@id/buttonRow"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        android:layout_marginBottom="8dp"
-        tools:listitem="@layout/recyclerview_profiles" />
-
-    <Button
-        android:id="@+id/nav_logout_button"
-        android:layout_marginBottom="8dp"
-        android:layout_width="204dp"
-        android:layout_height="41dp"
-        android:layout_marginEnd="104dp"
-        android:text="Logout"
-        android:visibility="invisible"
-        android:background="#FF0000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttonRow"
-        tools:visibility="visible" />
-
-    <Button
-        android:id="@+id/nav_register_button"
-        android:layout_marginBottom="8dp"
-        android:layout_width="204dp"
-        android:layout_height="41dp"
-        android:layout_marginEnd="104dp"
-        android:text="Registreer"
-        android:visibility="gone"
-        android:background="#FF0000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttonRow"
-        tools:visibility="visible" />
+        tools:listitem="@layout/recyclerview_admin" />
 
     <LinearLayout
         android:id="@+id/buttonRow"
@@ -92,12 +65,20 @@
             android:textColor="#FFFFFF"
             />
 
-
-
-
-
     </LinearLayout>
 
-    <!-- Your other UI components can be added here -->
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        app:layout_constraintBottom_toBottomOf="@id/recyclerview"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+
+        android:src="@drawable/ic_add_black_24dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,31 +1,35 @@
-package com.example.sl3verbeterd
+package com.example.sl3verbeterd.ui.applicant
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
+import com.example.sl3verbeterd.R
+import android.content.Intent
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.sl3verbeterd.HireHubApplication
+import com.example.sl3verbeterd.Profile
+import com.example.sl3verbeterd.ProfileListAdapter
 
 import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+
 import androidx.lifecycle.observe
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.sl3verbeterd.ui.applicant.ApplicantsActivity
-import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModel
-import com.example.sl3verbeterd.ui.applicant.ApplicantsViewModelFactory
-import com.example.sl3verbeterd.ui.applicant.NewApplicantsActivity
-import com.example.sl3verbeterd.ui.applicant.ProfileDetailsActivity
-import com.example.sl3verbeterd.ui.applicant.UpdateApplicantsActivity
+import com.example.sl3verbeterd.MainActivity
 import com.example.sl3verbeterd.ui.auth.LandingActivity
 import com.example.sl3verbeterd.ui.auth.RegisterActivity
 import com.example.sl3verbeterd.ui.profile.ProfileActivity
 
-class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListener {
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+
+class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListener {
 
     private val newActivityRequestCode = 1
+
 
     private val applicantsViewModel: ApplicantsViewModel by viewModels {
         ApplicantsViewModelFactory((applicationContext as HireHubApplication).repository)
@@ -33,67 +37,40 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_applicants)
 
-        val layoutRole: String = "Guest"
+        val id = intent.getIntExtra("id", 0)
+        val layoutRole = intent.getStringExtra("role") ?: "guest"
+        val role = intent.getStringExtra("role") ?: "guest"
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = ProfileListAdapter(this, layoutRole) // Initialize adapter with the listener
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Retrieve the user's role from the session, default to "guest" if not provided
-        val role = intent.getStringExtra("role") ?: "guest"
-        val username = intent.getStringExtra("username") ?: "Gast"
-        val id = intent.getIntExtra("id", 0)
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener {
+            if (role == "admin"){
+            val intent = Intent(this@ApplicantsActivity, NewApplicantsActivity::class.java)
+                intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+                intent.putExtra("id", id)
+            startActivity(intent)
+                finish()
+            } else {
+                val intent = Intent(this@ApplicantsActivity, RegisterActivity::class.java)
+                intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+                intent.putExtra("id", id)
+                startActivity(intent)
+                finish()
+            }
+        }
 
         val navHomeButton = findViewById<Button>(R.id.nav_home_button)
         val navApplicantsButton = findViewById<Button>(R.id.nav_applicants_button)
         val navProfileButton = findViewById<Button>(R.id.nav_profile_button)
-        val navLogoutButton = findViewById<Button>(R.id.nav_logout_button)
-        val navRegisterButton = findViewById<Button>(R.id.nav_register_button)
 
 
-        Log.d("MainActivity", "Received Role: $role, Received ID: $id, Received Name: $username")
 
-        // Navigation bar logic per role
-        if (role == "guest") {
-            navProfileButton.visibility = View.GONE
-            navApplicantsButton.visibility = View.GONE
-            navRegisterButton.visibility = View.VISIBLE
-
-            navRegisterButton.setOnClickListener {
-                val intent = Intent(this@MainActivity, RegisterActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        }
-
-        else if (role == "user"){
-            navApplicantsButton.visibility = View.GONE
-            navLogoutButton.visibility = View.VISIBLE
-
-            navLogoutButton.setOnClickListener {
-                val intent = Intent(this@MainActivity, LandingActivity::class.java)
-                intent.flags =
-                    Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-                finish()
-            }
-        }
-
-        else {
-            // Show logout button only for logged-in users
-            navRegisterButton.visibility = View.GONE
-            navLogoutButton.visibility = View.VISIBLE
-
-            navLogoutButton.setOnClickListener {
-                val intent = Intent(this@MainActivity, LandingActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-                finish()
-            }
-        }
 
         navHomeButton.setOnClickListener {
             // Implement the behavior for the home button based on the user's role
@@ -113,23 +90,24 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
 
         if (role == "guest"){
             applicantsViewModel.allVisibleProfiles.observe(owner = this) { profiles ->
-                // Update the cached copy of the words in the adapter.
-                profiles.let { adapter.submitList(it) }
-            }} else {
-            applicantsViewModel.allProfiles.observe(owner = this) { profiles ->
-                // Update the cached copy of the words in the adapter.
-                profiles.let { adapter.submitList(it) }
-            }}
+            // Update the cached copy of the words in the adapter.
+            profiles.let { adapter.submitList(it) }
+        }} else {
+        applicantsViewModel.allProfiles.observe(owner = this) { profiles ->
+            // Update the cached copy of the words in the adapter.
+            profiles.let { adapter.submitList(it) }
+        }}
+
 
     }
-
 
     override fun onProfileClick(profile: Profile) {
         // Handle profile click
     }
 
     override fun onResetProfileClick(profile: Profile) {
-        // Handle profile click
+        val id = "${profile.id}".toInt()
+        applicantsViewModel.resetProfile(id)
     }
 
     override fun onShowDetailsClick(id: Int) {
@@ -137,7 +115,7 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
         // You can navigate to a new activity or fragment to show the details.
         // Example:
         val role = intent.getStringExtra("role") ?: "guest"
-        val intent = Intent(this@MainActivity, ProfileDetailsActivity::class.java)
+        val intent = Intent(this@ApplicantsActivity, ProfileDetailsActivity::class.java)
         intent.putExtra("profileId", id)
         intent.putExtra("role", role)
         startActivity(intent)
@@ -148,8 +126,21 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
     }
 
     override fun onAddProfileClick(profile: Profile) {
-        val intent = Intent(this@MainActivity, NewApplicantsActivity::class.java)
-        startActivity(intent)
+        val role = intent.getStringExtra("role") ?: "guest"
+        val id = intent.getIntExtra("id", 0)
+        if (role == "admin"){
+            val intent = Intent(this@ApplicantsActivity, NewApplicantsActivity::class.java)
+            intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+            intent.putExtra("id", id)
+            startActivity(intent)
+        } else {
+            val intent = Intent(this@ApplicantsActivity, RegisterActivity::class.java)
+            intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
+            intent.putExtra("id", id)
+            startActivity(intent)
+            }
+
+
 
     }
 
@@ -176,7 +167,7 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
 
     override fun onUpdateProfileClick(profile: Profile) {
         val role = intent.getStringExtra("role") ?: "guest"
-        val intent = Intent(this@MainActivity, UpdateApplicantsActivity::class.java)
+        val intent = Intent(this@ApplicantsActivity, UpdateApplicantsActivity::class.java)
         intent.putExtra("id", "${profile.id}")
         intent.putExtra("oldFirstName", profile.firstName)
         intent.putExtra("oldLastName", profile.lastName)
@@ -189,7 +180,7 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
         startActivity(intent)
     }
 
-    override fun onToggleVisibilityClick(profile: Profile) {
+   override fun onToggleVisibilityClick(profile: Profile) {
         val id = profile.id
         applicantsViewModel.toggleVisibility(id)
     }
@@ -217,12 +208,11 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
         const val EXTRA_REPLY = "com.example.sl3verbeterd.REPLY"
     }
 
-
     private fun handleNavigation(destination: String, role: String, id: Int) {
         // Check the user's role and navigate accordingly
         when (destination) {
             "home" -> {
-                val intent = Intent(this@MainActivity, MainActivity::class.java)
+                val intent = Intent(this@ApplicantsActivity, MainActivity::class.java)
                 intent.putExtra("role", role) // Pass the user's role to ProfileActivity if needed
                 intent.putExtra("id", id)
                 startActivity(intent)
@@ -230,14 +220,14 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
             "applicants" -> {
 
                 if (role == "guest") {
-                    val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
+                    val intent = Intent(this@ApplicantsActivity, ApplicantsActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
 
                 else {
 
-                    val intent = Intent(this@MainActivity, ApplicantsActivity::class.java)
+                    val intent = Intent(this@ApplicantsActivity, ApplicantsActivity::class.java)
                     intent.putExtra("role", role) // Pass the user's role to ApplicantsActivity
                     intent.putExtra("id", id)
                     startActivity(intent)
@@ -246,7 +236,7 @@ class MainActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickListene
             }
             "profile" -> {
                 // Navigate to ProfileActivity
-                val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+                val intent = Intent(this@ApplicantsActivity, ProfileActivity::class.java)
                 intent.putExtra("role", role) // Pass the user's role to ProfileActivity if needed
                 intent.putExtra("id", id)
                 startActivity(intent)

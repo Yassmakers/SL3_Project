@@ -9,6 +9,8 @@ import com.example.sl3verbeterd.model.ProfileAndAccount
 class HireHubRepository(private val hireHubDao: HireHubDao) {
 
     val allProfiles: Flow<List<Profile>> = hireHubDao.getProfilesOrderedByFirstName()
+    val allVisibleProfiles: Flow<List<Profile>> = hireHubDao.getAllVisibleProfiles()
+
     suspend fun showProfile(id: Int): LiveData<Profile> {
         return hireHubDao.showProfile(id)
     }
@@ -19,6 +21,10 @@ class HireHubRepository(private val hireHubDao: HireHubDao) {
 
     suspend fun resetProfile(id: Int) {
         hireHubDao.resetProfile(id)
+    }
+
+    suspend fun toggleVisibility(id: Int) {
+        hireHubDao.toggleVisibility(id)
     }
 
     fun getProfileAndAccountById(id: Int): LiveData<ProfileAndAccount> {

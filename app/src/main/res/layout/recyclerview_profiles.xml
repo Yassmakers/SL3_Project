@@ -51,4 +51,13 @@
         android:visibility="gone"
         android:text="Niet ver" />
 
+    <Button
+        android:id="@+id/button_visibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Niet ver" />
+
+
+
 </LinearLayout>

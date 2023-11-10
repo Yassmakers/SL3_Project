@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sl3verbeterd.R
 import android.content.Intent
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
@@ -37,6 +38,8 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
         setContentView(R.layout.activity_profile)
 
     var userID = 0
+        var visibility = true
+
     var profile: Profile? = null
 
         name = findViewById(R.id.name)
@@ -46,6 +49,11 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
 
     val role = intent.getStringExtra("role") ?: "guest"
     val id = intent.getIntExtra("id", 0)
+
+        val buttonVisibility = findViewById<Button>(R.id.button_visibility)
+        val buttonDelete = findViewById<Button>(R.id.button_delete)
+        val buttonUpdate = findViewById<Button>(R.id.button_update)
+        val buttonReset = findViewById<Button>(R.id.button_reset)
 
 
     applicantsViewModel.getProfileAndAccountById(id).observe(this, Observer { profileAndAccount ->
@@ -58,6 +66,7 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
 
 
             userID = it.id
+            visibility = it.visibility
 
             Log.d("ValCheck", "Received ID: ${it.id}, received username ${it.username}, received firstname ${it.firstName}")
             name.text = profileName
@@ -76,6 +85,8 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
                 visibility = it.visibility,
                 id = it.id
             )
+
+
         }
     })
 
@@ -83,9 +94,6 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
 
         val usableUserID = userID
 
-        val buttonDelete = findViewById<Button>(R.id.button_delete)
-        val buttonUpdate = findViewById<Button>(R.id.button_update)
-        val buttonReset = findViewById<Button>(R.id.button_reset)
 
         // Set OnClickListener for the delete button
         buttonDelete.setOnClickListener {
@@ -98,6 +106,14 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
             // Call the onDeleteClick method when the delete button is clicked
             onResetProfileClick(profile ?: return@setOnClickListener)
         }
+
+        buttonVisibility.setOnClickListener {
+            // Call the toggleVisibility method when the visibility button is clicked
+                onToggleVisibilityClick(profile ?: return@setOnClickListener)
+
+        }
+
+
 
 
         buttonUpdate.setOnClickListener {
@@ -152,6 +168,11 @@ class ProfileActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickList
         val intent = Intent(this@ProfileActivity, ProfileDetailsActivity::class.java)
         intent.putExtra("profileId", id)
         startActivity(intent)
+    }
+
+    override fun onToggleVisibilityClick(profile: Profile) {
+        val id = profile.id
+        applicantsViewModel.toggleVisibility(id)
     }
 
     override fun showProfile(id: Int) {

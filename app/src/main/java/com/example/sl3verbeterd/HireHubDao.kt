@@ -21,7 +21,7 @@ interface HireHubDao {
     ////////////////  /// Profile ////  ////////////////
     ////////////////  ////////////////  ////////////////
 
-        @Query("UPDATE profile SET visibility = NOT visibility WHERE id = :id")
+    @Query("UPDATE profile SET visibility = NOT visibility WHERE id = :id")
     suspend fun toggleVisibility(id: Int)
 
     @Upsert
@@ -50,6 +50,9 @@ interface HireHubDao {
 
     @Query("SELECT * FROM profile WHERE id = :profileId")
     fun getProfileById(profileId: Int): LiveData<Profile>
+
+    @Query("SELECT * FROM profile WHERE visibility = 1")
+    fun getAllVisibleProfiles(): Flow<List<Profile>>
 
     @Query("UPDATE profile SET firstName='Voornaam', lastName='Achternaam', location='Woonplaats', job='Je functie' WHERE id = :id")
     suspend fun resetProfile(id: Int)

@@ -68,10 +68,18 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
         // in the foreground.
+
+        if (role == "guest"){
+            applicantsViewModel.allVisibleProfiles.observe(owner = this) { profiles ->
+            // Update the cached copy of the words in the adapter.
+            profiles.let { adapter.submitList(it) }
+        }} else {
         applicantsViewModel.allProfiles.observe(owner = this) { profiles ->
             // Update the cached copy of the words in the adapter.
             profiles.let { adapter.submitList(it) }
-        }
+        }}
+
+
     }
 
     override fun onProfileClick(profile: Profile) {
@@ -135,6 +143,10 @@ class ApplicantsActivity : AppCompatActivity(), ProfileListAdapter.ProfileClickL
         startActivity(intent)
     }
 
+   override fun onToggleVisibilityClick(profile: Profile) {
+        val id = profile.id
+        applicantsViewModel.toggleVisibility(id)
+    }
 
 
 

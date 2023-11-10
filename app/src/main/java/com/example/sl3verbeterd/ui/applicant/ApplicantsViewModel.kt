@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class ApplicantsViewModel(private val repository: HireHubRepository) : ViewModel() {
+
     private val _loginSuccess = MutableLiveData<Boolean>()
     val loginSuccess: LiveData<Boolean> get() = _loginSuccess
 
@@ -36,7 +37,7 @@ class ApplicantsViewModel(private val repository: HireHubRepository) : ViewModel
     private val state = MutableStateFlow(AccountState())
 
     val allProfiles: LiveData<List<Profile>> = repository.allProfiles.asLiveData()
-//    val allAccounts: LiveData<List<Account>> = repository.allAccounts.asLiveData()
+    val allVisibleProfiles: LiveData<List<Profile>> = repository.allVisibleProfiles.asLiveData()
 
     fun insertProfile(profile: Profile) = viewModelScope.launch {
         repository.insertProfile(profile)
@@ -60,6 +61,12 @@ class ApplicantsViewModel(private val repository: HireHubRepository) : ViewModel
 
     fun deleteProfile(profile: Profile) = viewModelScope.launch {
         repository.deleteProfile(profile)
+    }
+
+    fun toggleVisibility(id: Int) {
+        viewModelScope.launch {
+            repository.toggleVisibility(id)
+        }
     }
 
     fun deleteAccount(account: Account) = viewModelScope.launch {

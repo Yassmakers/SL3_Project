@@ -21,6 +21,7 @@ class ProfileListAdapter(private val clickListener: ProfileClickListener) :
         fun onUpdateProfileClick(profile: Profile)
         fun showProfile(id: Int)
         fun onResetProfileClick(profile: Profile)
+        fun onToggleVisibilityClick(profile: Profile)
     }
 
 

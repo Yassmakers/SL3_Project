@@ -24,6 +24,7 @@ Dit is de handleiding voor de HireHub Kotlin-applicatie, een project dat gericht
 - Open het project in Android Studio.
 - Zorg ervoor dat alle benodigde bibliotheken correct zijn geïnstalleerd en dat de .gradle instellingen gesynct is.
 - Compileer en voer het project uit.
+- Er is ook een werkend APK bestand beschikbaar in de Apk HireHub Bestand folder die te vinden is op de root van het Project (de applicatie build en runt natuurlijk uitzichzelf gewoon prima en maakt dit aan dit was gewoon voor de zekerheid )
 
 
 ## Inloggegevens
@@ -35,16 +36,16 @@ Dit is de handleiding voor de HireHub Kotlin-applicatie, een project dat gericht
 #### Beheerder - Administrator:
 
     Gebruikersnaam = Admin
-    Wachtwoord: Admin123
+    Wachtwoord = Admin123
 Recruiter:
 
     Gebruikersnaam = Recruiter
-    Wachtwoord: Recruiter123
+    Wachtwoord = Recruiter123
 
 Sollicitant:
 
     Gebruikersnaam = Gebruiker
-    Wachtwoord: Gebruiker123
+    Wachtwoord = Gebruiker123
 
 Systeemvereisten
 
